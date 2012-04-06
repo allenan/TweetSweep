@@ -52,8 +52,23 @@ if ( isset($_REQUEST['wipe'])) {
   $code = $tmhOAuth->request('GET', $tmhOAuth->url('1/account/verify_credentials'));
   if ($code == 200) {
     $resp = json_decode($tmhOAuth->response['response']);
-    echo $resp->screen_name;
-    print_r($resp);
+    	echo "<img src='$resp->profile_image_url' />";
+	echo "<br/>";
+	echo $resp->name;
+	echo "<br/>";
+	echo $resp->screen_name;
+	echo "<br/>";
+	echo $resp->location;
+	echo "<br/>";
+	echo "Tweets: ".$resp->statuses_count;
+	echo "<br/>";
+	echo "Following: ".$resp->friends_count;
+	echo"<br/>";
+	echo "Followers: ".$resp->followers_count;
+    	echo "<br/>";
+	echo "<pre>";
+	print_r($resp);
+	echo "</pre>";
   } else {
     outputError($tmhOAuth);
   }
@@ -94,8 +109,9 @@ if ( isset($_REQUEST['wipe'])) {
     $method = isset($_REQUEST['authenticate']) ? 'authenticate' : 'authorize';
     $force  = isset($_REQUEST['force']) ? '&force_login=1' : '';
     $authurl = $tmhOAuth->url("oauth/{$method}", '') .  "?oauth_token={$_SESSION['oauth']['oauth_token']}{$force}";
-    echo '<p>To complete the OAuth flow follow this URL: <a href="'. $authurl . '">' . $authurl . '</a></p>';
-  } else {
+   // echo '<p>To complete the OAuth flow follow this URL: <a href="'. $authurl . '">' . $authurl . '</a></p>';
+    header("Location: $authurl"); 
+ } else {
     outputError($tmhOAuth);
   }
 }
