@@ -53,6 +53,7 @@ if ( isset($_REQUEST['wipe'])) {
   if ($code == 200) {
     $resp = json_decode($tmhOAuth->response['response']);
     echo $resp->screen_name;
+    print_r($resp);
   } else {
     outputError($tmhOAuth);
   }
