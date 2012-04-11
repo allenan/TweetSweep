@@ -54,6 +54,8 @@ if ( isset($_REQUEST['wipe'])) {
   if ($code == 200) {
     $resp = json_decode($tmhOAuth->response['response']);
 
+    $user_tweets = file_get_contents("http://api.twitter.com/1/statuses/user_timeline.json?screen_name=".$resp->screen_name);
+    $user_tweets = json_decode($user_tweets);
 	// echo "<pre>";
 	// print_r($resp);
 	// echo "</pre>";
@@ -105,8 +107,7 @@ if ( isset($_REQUEST['wipe'])) {
   }
 }
 
-$user_tweets = file_get_contents("http://api.twitter.com/1/statuses/user_timeline.json?screen_name=".$resp->screen_name);
-$user_tweets = json_decode($user_tweets);
+
 
 
 ?>
