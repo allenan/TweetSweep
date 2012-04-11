@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+		<title>OpenCalais PHP Demo - Results</title>
+
+		<script type="text/javascript" src="ViewerJSON/js/wz_tooltip.js"></script>
+		<script type="text/javascript" src="ViewerJSON/js/xmlutils.js"></script>
+		<script type="text/javascript" src="ViewerJSON/js/attributevaluecollection.js"></script>
+		<script type="text/javascript" src="ViewerJSON/js/clfdocview.js"></script>
+		<script type="text/javascript" src="ViewerJSON/js/clfframeattributes.js"></script>
+		<script type="text/javascript" src="ViewerJSON/js/clfgeneralprototype.js"></script>
+		<script type="text/javascript" src="ViewerJSON/js/clfwriter.js"></script>
+		<script type="text/javascript" src="ViewerJSON/js/clfjson.js"></script>
+		<script type="text/javascript" src="ViewerJSON/js/clfjsonparser.js"></script>
+		<script type="text/javascript" src="ViewerJSON/js/extractionresults.js"></script>
+		<script type="text/javascript" src="ViewerJSON/js/highlight.js"></script>
+		<script type="text/javascript" src="ViewerJSON/js/marknextprev.js"></script>
+		<script type="text/javascript" src="ViewerJSON/js/clfxmlparser.js"></script>
+		<script type="text/javascript" src="ViewerJSON/js/clfxsltparser.js"></script>
+
+		<link href="ViewerJSON/css/highlight.css" rel="stylesheet" />
+		<link href="ViewerJSON/css/calaisviewer.css" rel="stylesheet" />
+		
+		<link href="ViewerJSON/img/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+		<link href="ViewerJSON/img/favicon.ico" rel="icon" type="image/x-icon"/>
+	</head>
+	<body onload="javascript:run();">
+		<a href="http://opencalais.com/" target="_blank" style="display:block; top:0; left:0; margin-bottom:25px;"><img alt="Calais Homepage" src="img/logo.jpg" width="156" height="58" border="0"/></a>	
+<!-- RESULT//////////////////////////////////////////////////// -->		
+		<div id="RESULT" style="position: absolute; top:80; left:7;">
+			<table>
+				<tr valign="top">
+					<td>
+						<div id="placeholderfordoc" style="overflow: auto; text-align: left; margin-left: 10px;" />
+					</td>
+				</tr>
+			</table>
+		</div>
+<!-- CalaisJSONInfo//////////////////////////////////////////////////// -->		
+		<div id="CalaisJSONInfo" style="visibility: hidden; position: absolute; top:80; left:7;">
+		<textarea id="CalaisJSON" readonly="readonly"></textarea>
+		</div>
+		
+		<script type="text/javascript">
+		var _imagePath = "./img";
+//		loadResources(null, "./img/");
+		function id(i) {
+			return document.getElementById(i);
+		}
+
+		function run() {
+  		var jsonText = <?php echo "\"".addslashes($json_res)."\""; ?>;
+  		id("CalaisJSON").value = jsonText;
+  		
+  		var jsonObj = eval('(' + jsonText + ')');
+  					 
+  		initHighlight(jsonText, jsonObj, "placeholderfordoc", "placeholderforsidebar", "Entities:", "Events & Facts:");
+  		replaceSpace2BR();
+  		collapseExpandAll(true);
+  		changeHighlightAll(true);
+		}		
+		
+		function replaceSpace2BR() {
+			var alltextnodes = findTypeNodes(document.getElementById("placeholderfordoc"),3);
+			for(var i = 0; i < alltextnodes.length; i++) {
+				var nextelm = alltextnodes[i].nextSibling;
+				var smalltxts = alltextnodes[i].data.split('\n');
+				if (smalltxts.length > 1) {
+					alltextnodes[i].data = smalltxts[0]
+					for (var j = 1; j < smalltxts.length; j++) {
+						var br = document.createElement("BR");
+						if (nextelm != null)
+							nextelm.insertAdjacentElement("beforeBegin", br);
+						else
+							alltextnodes[i].parentNode.appendChild(br);
+						if (smalltxts[j].length > 0)
+							br.insertAdjacentText("afterEnd", smalltxts[j]);
+					}
+				}
+			}
+		}
+
+		// Recursively find all text nodes within an element
+		function findTypeNodes(elem, type) {
+			var typeNodes = new Array();
+			// Search all children of this element to see which ones are the right type of node
+			for (var nodeI = 0; nodeI < elem.childNodes.length; nodeI++) {
+				if (elem.childNodes[nodeI].nodeType == type)
+					typeNodes.push(elem.childNodes[nodeI]); // If it is a the right type of node, add it to the array
+				else
+					// If not a the right type of node, search it in turn
+					typeNodes = typeNodes.concat(findTypeNodes(elem.childNodes[nodeI],type));
+			}
+			return typeNodes; // return the array
+		}
+		</script>
+	</body>
+</html>

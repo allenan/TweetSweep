@@ -74,9 +74,10 @@ $tweetSweep->sortUserMentions();
   <div class="span3">
 <h2>Top 10 Hashtags</h2>
 
-<table class="table">
+<table class="table" style="width:290px;">
   <thead>
     <tr>
+      <th>&nbsp;</th>
       <th>Hashtag</th>
       <th># Uses</th>
     </tr>
@@ -85,6 +86,7 @@ $tweetSweep->sortUserMentions();
   <?php $i = 0; ?>
 <?php foreach ($tweetSweep->hashtagStruct as $h): ?>
   <tr>
+    <td><a class="add-btn" data-content="<?php echo $h['text']; ?>" data-prefix="#" href="#"><img src="img/add.png"/></a></td>
     <td><a href="https://twitter.com/#!/search/<?php echo urlencode('#'.$h['text']); ?>" target="_blank"><?php echo '#'.$h['text']?></a></td>
     <td><?php echo $h['count']?></td>
   </tr>
@@ -99,6 +101,7 @@ $tweetSweep->sortUserMentions();
 <table class="table">
     <thead>
     <tr>
+      <th>&nbsp;</th>
       <th>User</th>
       <th># Mentions</th>
     </tr>
@@ -107,6 +110,7 @@ $tweetSweep->sortUserMentions();
   <?php $i = 0; ?>
 <?php foreach ($tweetSweep->userMentionStruct as $h): ?>
   <tr>
+    <td><a class="add-btn" data-content="<?php echo $h['screen_name']; ?>" data-prefix="@" href="#"><img src="img/add.png"/></a></td>
     <td><a href="https://twitter.com/#!/<?php echo urlencode($h['screen_name']); ?>" target="_blank"><?php echo '@'.$h['screen_name']?></a></td>
     <td><?php echo $h['count']?></td>
   </tr>

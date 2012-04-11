@@ -8,12 +8,12 @@ $tmhOAuth = new tmhOAuth(array());
 
 $params = array(
   'q'        => 'android', //Search Query',
-  //'since_id' => '', //'Get results since this ID (or leave blank for earliest allowed)',
-  //'pages'    => '1', //'How many pages should be retrieved?',
+  'since_id' => '', //'Get results since this ID (or leave blank for earliest allowed)',
+  'pages'    => '1', //'How many pages should be retrieved?',
   'rpp'      => '15', //'Results per page (default 15)',
-  //'max_id'   => '', //'Max ID to accept. This isn\'t sent to Search but instead used to filter the received results',
-  //'geocode'  => '', //Geo co-ordinates (e.g. 37.781157,-122.398720,1mi)',
-  //'lang'     => 'en' //Restrict results to a specific language? (en,fr,de etc)'
+  'max_id'   => '', //'Max ID to accept. This isn\'t sent to Search but instead used to filter the received results',
+  'geocode'  => '', //Geo co-ordinates (e.g. 37.781157,-122.398720,1mi)',
+  'lang'     => 'en' //Restrict results to a specific language? (en,fr,de etc)'
 );
 
 foreach ($params as $k => $v) :

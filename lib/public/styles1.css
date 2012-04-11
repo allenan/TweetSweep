@@ -1,0 +1,13 @@
+body
+{
+	padding:0px 30px;
+	background: #fff url(img/bg1.gif) repeat-x top;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size:small; #font-size:x-small; _font-size:x-small;
+	color: #4F4F4F;
+}
+
+.text01 textarea { border: solid 1px #a1abaf; width: 100%; background: #f6f6f6; margin-top:30px; #margin-top:10px; _margin-top:10px; }
+.text01 DIV { text-align:left; width: 90%; }
+
+.title1 { color:#009dda; font-weight:bold; font-size: large; #font-size:medium; _font-size:medium; float: right; margin:-60px 0 0 0;  }

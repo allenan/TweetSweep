@@ -46,6 +46,7 @@ if ( isset($_REQUEST['wipe'])) {
 
 // already got some credentials stored?
 } elseif ( isset($_SESSION['access_token']) ) {
+
   $tmhOAuth->config['user_token']  = $_SESSION['access_token']['oauth_token'];
   $tmhOAuth->config['user_secret'] = $_SESSION['access_token']['oauth_token_secret'];
 
@@ -53,9 +54,10 @@ if ( isset($_REQUEST['wipe'])) {
   if ($code == 200) {
     $resp = json_decode($tmhOAuth->response['response']);
 
-	//echo "<pre>";
-	//print_r($resp);
-	//echo "</pre>";
+	// echo "<pre>";
+	// print_r($resp);
+	// echo "</pre>";
+ //  die();
   } else {
     outputError($tmhOAuth);
   }
@@ -106,6 +108,7 @@ if ( isset($_REQUEST['wipe'])) {
 $user_tweets = file_get_contents("http://api.twitter.com/1/statuses/user_timeline.json?screen_name=".$resp->screen_name);
 $user_tweets = json_decode($user_tweets);
 
+
 ?>
 
 
@@ -127,6 +130,16 @@ $user_tweets = json_decode($user_tweets);
       #user-table td{
         padding: 5px;
       }
+      #tags{
+        /*margin-top:10px;*/
+      }
+      #tags ul{
+        list-style:none;
+      }
+      #tags > ul{
+        margin-top:10px;
+        margin-left:0px;
+      }
     </style>
     <link href="css/bootstrap-responsive.css" rel="stylesheet">
     <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/themes/base/jquery-ui.css" rel="stylesheet">
@@ -144,7 +157,7 @@ $user_tweets = json_decode($user_tweets);
   </head>
 
   <body>
-
+<?php if(isset($_SESSION['access_token'])): ?>
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
@@ -203,7 +216,11 @@ $user_tweets = json_decode($user_tweets);
           </tr>
           <tr>
             <td colspan="3">
-              <textarea class="" id="textarea" rows="3" style="width:96%" placeholder="Compose new tweet..."></textarea>
+              <textarea class="" id="composition-textarea" rows="3" style="width:96%" placeholder="Compose new tweet..."></textarea>
+              <div style="text-align:right;">
+                <span id="chars-remaining">140</span>
+                <button id="tweet-btn" class="btn btn-info disabled">Tweet</button>
+              </div>
             </td>
           </tr>
         </table>
@@ -228,7 +245,7 @@ $user_tweets = json_decode($user_tweets);
       </div> <!-- span3 -->
     </div>
 
-      <div id="result" class="span6 well" style="height:525px"> 
+      <div id="result" class="span6 well" style="height:552px"> 
 
       </div>
       <div class="span2 well">
@@ -242,6 +259,9 @@ $user_tweets = json_decode($user_tweets);
         <div id="slider"></div>
 
         </div><!-- End demo -->
+        <br/>
+        <h4>Tags:</h4>
+        <div id="tags"></div>
       </div>
       <!-- <a id="testButton" class="btn" data-toggle="modal" data-contents="#masters" href="#myModal" >Launch Modal</a> -->
 
@@ -258,7 +278,62 @@ $user_tweets = json_decode($user_tweets);
     </div> <!-- /row -->
 
     </div> <!-- /container -->
+<?php else: ?>
+<div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="#">TweetSweep</a>
+          <div class="nav-collapse">
+            <ul class="nav">
+              <li class="active"><a href="#">Home</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#contact">Contact</a></li>
+             
+            </ul>
+            
+            
+          </div><!--/.nav-collapse -->
 
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="hero-unit">
+        <h1>Hello, world!</h1>
+        <p>This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+        <p><a class="btn btn-primary btn-large" href="?authorize=1">Authorize App »</a></p>
+      </div>
+      <div class="row">
+        <div class="span4">
+          <h2>Heading</h2>
+           <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+          <p><a class="btn" href="#">View details »</a></p>
+        </div>
+        <div class="span4">
+          <h2>Heading</h2>
+           <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+          <p><a class="btn" href="#">View details »</a></p>
+       </div>
+        <div class="span4">
+          <h2>Heading</h2>
+          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+          <p><a class="btn" href="#">View details »</a></p>
+        </div>
+      </div>
+      <hr/>
+      <footer>
+        <p>© TweetSweep 2012</p>
+      </footer>
+    </div>
+
+
+<?php endif; ?>
 
 
     <!-- javascript
@@ -271,25 +346,32 @@ $user_tweets = json_decode($user_tweets);
       $.ajaxSetup ({
         cache: false
       });
-      var ajax_load = "<img src='img/bird-loader.gif' alt='loading...' style='margin-top:220px;margin-left:320px;' />";
+      
 
     //  load() functions
-      var loadUrl = "search2.php";
+      function search(q){
+        var ajax_load = "<img src='img/bird-loader.gif' alt='loading...' style='margin-top:170px;margin-left:235px;' />";
+        var loadUrl = "search2.php";
+        var pages = $('#amount').val();
+        $("#result").html(ajax_load).load(loadUrl, "q="+q+"&pages="+pages, function(){
+          assignAdds();
+        });
+      };
+      
       $("#search-form").submit(function(e){
         var query = $('#search-form input').val();
-        var pages = $('#amount').val();
         e.preventDefault();
-        $("#result").html(ajax_load).load(loadUrl, "q="+query+"&pages="+pages);
-
+        search(query);
+        
       });
 
-      $('#myModal').modal({
-        keyboard: false
-      }).modal('hide');
+      // $('#myModal').modal({
+      //   keyboard: false
+      // }).modal('hide');
 
-      $('#testButton').click(function(e){
-        $(".modal-body").html(ajax_load).load("https://twitter.com/#!/search/%23masters");
-      });
+      // $('#testButton').click(function(e){
+      //   $(".modal-body").html(ajax_load).load("https://twitter.com/#!/search/%23masters");
+      // });
       
 
     </script>
@@ -307,8 +389,86 @@ $user_tweets = json_decode($user_tweets);
     $( "#amount" ).val(  $( "#slider" ).slider( "value" ) );
   });
   </script>
+  <script>
+    function assignAdds () {
+      $('.add-btn').click(function(e){
+        e.preventDefault();
+        var textarea = $('#composition-textarea');
+        var text = textarea.val();
+        var newText = $(this).data("content");
+        var prefix = $(this).data("prefix");
+
+        if (text.search(newText) != -1) { //If the string is in the textarea...
+          text = text.replace(newText, prefix+newText);
+          textarea.val(text);
+        }else{ //just append it
+          textarea.val(text+" "+prefix+newText);
+        };
+        
+      });
+    }
+    
+  </script>
+  <script>//responsive features of typing in the composition area
+    $('#composition-textarea').live('keyup',function(){
+      var charsRemaining = $('#chars-remaining');
+      var prevChars = parseInt(charsRemaining.text());
+      var currentChars = $(this).val().length;
+      charsRemaining.text(140 - currentChars);
+      if (currentChars>0) {
+        $('#tweet-btn').removeClass('disabled');
+      }else{
+        $('#tweet-btn').addClass('disabled');
+      };
+    });
+  </script>
+  <script>//execute tweet on click of tweet button
+    $('#tweet-btn').click(function() {
+      var status = $('#composition-textarea').val();
+
+      $.post(
+          'tweet.php',
+          { status: status },
+          function() {alert('success!');},
+          "html"
+        );
+    });
+  </script>
+  <script>//check composition area for links and ajax them to nlp.php
+    $('#composition-textarea').change(function() {
+      var ajax_load = '<img src="img/ajax-loader.gif"/>';
+      var url = $(this).val();
+      var loadUrl = 'nlp.php';
+      $("#tags").html(ajax_load).load(loadUrl, "url="+url, function(){
+          checkboxTree();
+        });
+    });
+  </script>
+  <script>//expand & collapse tags checkboxes
+    function checkboxTree(){
+      $('#tags > ul  ul').hide();
+      $('#tags > ul > li').prepend('<a href="#"><img src="img/expand.png"/></a>');
+      $('#tags > ul a').click(function(e){
+        e.preventDefault();
+        var thisUl = $(this).parent().find("ul");
+        thisUl.slideToggle('fast',
+          function () {
+            if(thisUl.is(":hidden")){
+              $(this).parent().find("img").attr({src:"img/expand.png"});
+            } else{
+              $(this).parent().find("img").attr({src:"img/collapse.png"});
+            }
+          });
+      });
+      $('#tags ul input').change(function(){
+        search($(this).data("content"));
+      });
+    }
+
+  </script>
 
 
   </body>
 </html>
+
 

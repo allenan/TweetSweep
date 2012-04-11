@@ -1,0 +1,228 @@
+/* DOC container */ 
+#CLFDOCRoot { background: #fff; border: 1px solid #fff; margin: 0; padding: 8px 13px; font-family: Tahoma,sans-serif; font-size: 11px;  }
+
+/* Sidebar container (Toolbar) */ 
+#CLFMenuSidebar { height:16px; display: block; margin: 0 0 5px 0; padding:4px; border: 1px solid #B3C2D0; background: #D9DBE3; font-family: Tahoma,sans-serif; font-size: 11px;}
+
+/* Sidebar container (Entities) */ 
+#CLFTermsSidebar { display: block; margin: 0 0 15px 0; padding: 5px; border: 1px solid #9FB2C4; background:#EAEDF0; font-family: Tahoma,sans-serif; font-size: 11px;}
+
+/* Sidebar container (Events & Facts) */ 
+#CLFRelationsSidebar { display: block; margin: 0; padding: 5px; border: 1px solid #9FB2C4; background:#EAEDF0; font-family: Tahoma,sans-serif; font-size: 11px;}
+
+/* Indentation in DOC */
+.CLFDOCLevel0 { font-size: 17px; color: #3A6D98; margin-top:20px; border-top: dashed 1px #ccc; }
+.CLFDOCLevel1 { font-size: 15px; margin-left: .1in; color: #5B91C0; }
+.CLFDOCLevel2 { font-size: 13px; margin-left: .2in; color: #0033FF; }
+.CLFDOCLevel3 { font-size: 11px; margin-left: .3in; color: #3366CC; }
+.CLFDOCLevel4 { font-size: 11px; margin-left: .4in; color: #336699; }
+.CLFDOCLevel5 { font-size: 11px; margin-left: .5in; color: #336699; }
+.CLFDOCLevel6 { font-size: 11px; margin-left: .6in; color: #336699; }
+.CLFDOCLevel7 { font-size: 11px; margin-left: .7in; color: #336699; }
+
+/* All text in DOC */
+.CLFDOCText { font-size: 11px; color: black; line-height:20px; }
+.CLFDOCText span { font-size: 11px; color: black; line-height:20px; }
+
+/* All headers in DOC */
+.CLFDOCHeader { font-weight: bold; }
+
+/* All links in DOC */
+A:Link.CLFDOCLink { font-size: 11px; color: #4A79B5; text-decoration:none; border-bottom: solid 1px #4A79B5; }
+A:hover.CLFDOCLink { font-size: 11px; color: #1A62E3; text-decoration:none; border-bottom: 1px solid #4AB5F9; }
+
+/* All Tables in DOC */
+/*.CLFTableRow1 { background-color: #7FB0FE; } */
+/*.CLFTableRow2 { background-color: #6FA0EE; } */
+
+/* Sidebar Category */
+.CLFSBCateg { font-size: 11px; display: block; color: #0D5A90; font-weight: bold; }
+
+/* Sitebar Term */
+.CLFSBTerm { font-size: 11px; display: block; color: black; margin-left: .2in;  }
+
+/* Sitebar Frame */
+.CLFSBFrame { font-size: 11px; display: block; color: black; margin-left: .2in;  }
+
+/* Sidebar Header */
+.CLFSBHeader { display:block; margin:-5px -5px 10px -5px; font-weight:bold; background: #C1CDD9; padding: 5px 3px; color:#0B4C77; font-size: 12px;}
+
+/* Sidebar buttons */
+.CLFHighlightAllNone { float:right; margin-top:-19px;}
+.CLFclearhighlights { width:14px;height: 14px; margin-left:4px; margin-right:4px;}
+.CLFhighlightsall { width:14px;height: 14px; margin-left:4px; margin-right:4px;}
+
+.CLFNextPrev { float:right; margin-top:-14px; }
+.findnext { width:14px;height: 14px; margin-left:4px;margin-right:4px;}
+.findprev { width:14px;height: 14px; margin-left:4px;margin-right:4px;}
+
+.CLFCollapseExpand {}
+.collapseAll { width:14px;height: 14px; margin-left:5px;}
+.expandAll { width:14px; height: 14px;}
+.collapseExpandIcon {width:14px;height: 14px;margin-right:-3px;margin-left:2px; margin-bottom: -1px;}
+
+/* -------------------- Coloring -------------------- */
+/* Documents Term inside Events & Facts: */
+/*.CLFTermInsideFrame { border: double 3px red; }*/
+/*.CLFTermInsideFrameCLFHighlight { border: double 3px blue; }*/
+
+/* Documents Entities: */
+.CLFAnyTermHighlight					{ border-bottom: double #E9EA87; font-weight: bold; }
+.CLFCityCLFHighlight					{ border-bottom: double #00FE64; }
+.CLFCompanyCLFHighlight					{ border-bottom: double #FE6C00; }
+.CLFContinentCLFHighlight				{ border-bottom: double #FF0000; }
+.CLFCountryCLFHighlight					{ border-bottom: double #AEFE00; }
+.CLFDateCLFHighlight					{ border-bottom: double #E7904A; }
+.CLFEmailAddressCLFHighlight			{ border-bottom: double #FED700; }
+.CLFFunctionEventCLFHighlight			{ border-bottom: double #00FEFE; }
+.CLFHolidayCLFHighlight					{ border-bottom: double #2BFE00; }
+.CLFIndustryTermCLFHighlight			{ border-bottom: double #FFB400; }
+.CLFMoneyAmountCLFHighlight				{ border-bottom: double #0063FE; }
+.CLFNaturalFeatureCLFHighlight			{ border-bottom: double #AF00FE; }
+.CLFOrganizationCLFHighlight			{ border-bottom: double #FE00D6; }
+.CLFOrganizationDescriptionCLFHighlight	{ border-bottom: double #FB171B; }
+.CLFPersonCLFHighlight					{ border-bottom: double #8000FF; }
+.CLFPersonDescriptionCLFHighlight		{ border-bottom: double #FF0D89; }
+.CLFPhoneNumberCLFHighlight				{ border-bottom: double #EF3FFD; }
+.CLFProductCLFHighlight					{ border-bottom: double #C39370; }
+.CLFProvinceOrStateCLFHighlight			{ border-bottom: double #00FE64; }
+.CLFRegionCLFHighlight					{ border-bottom: double #FE6C00; }
+.CLFTechnologyCLFHighlight				{ border-bottom: double #FF0000; }
+.CLFTimeCLFHighlight					{ border-bottom: double #AEFE00; }
+.CLFURLCLFHighlight						{ border-bottom: double #8000FF; }
+.CLFWeaponCLFHighlight					{ border-bottom: double #FED700; }
+/* Exceptional Terms */
+.CLFSBCategAddress						{ border-bottom: double #E9EA87; }
+.CLFSBCategDocReportPeriod				{ border-bottom: double #E9EA87; }
+.CLFSBCategDocType						{ border-bottom: double #E9EA87; }
+/* Documents Events & Facts */
+.CLFAnyEventHighlight						{ background-color: #FEFF99; }
+.CLFAcquisitionCLFHighlight					{ background-color: #7FFEB1; }
+.CLFAllianceCLFHighlight					{ background-color: #FEB57F; }
+.CLFAnalystEarningsEstimateCLFHighlight		{ background-color: #FF7F7F; }
+.CLFAnalystRecommendationCLFHighlight		{ background-color: #D6FE7F; }
+.CLFArrestCLFHighlight						{ background-color: #BF7FFF; }
+.CLFBankruptcyCLFHighlight					{ background-color: #FEEA7F; }
+.CLFBusinessRelationCLFHighlight			{ background-color: #7FFEFE; }
+.CLFBuybacksCLFHighlight					{ background-color: #94FE7F; }
+.CLFCompanyAffiliatesCLFHighlight			{ background-color: #FFD97F; }
+.CLFCompanyCustomerCLFHighlight				{ background-color: #7FB0FE; }
+.CLFCompanyEarningsAnnouncementCLFHighlight	{ background-color: #D67FFE; }
+.CLFCompanyEarningsGuidanceCLFHighlight		{ background-color: #FE7FEA; }
+.CLFCompanyIndustryCLFHighlight				{ background-color: #FB898B; }
+.CLFCompanyInvestmentCLFHighlight			{ background-color: #F69EFD; }
+.CLFCompanyLegalIssuesCLFHighlight			{ background-color: #FF86C4; }
+.CLFCompanyLocationCLFHighlight				{ background-color: #E7BB98; }
+.CLFCompanyProductCLFHighlight				{ background-color: #C3AB99; }
+.CLFCompanySynonymCLFHighlight				{ background-color: #FDCF87; }
+.CLFCompanyTechnologyCLFHighlight			{ background-color: #B5BDF3; }
+.CLFCompanyTickerCLFHighlight				{ background-color: #A4D2DE; }
+.CLFCompanyUsingProductCLFHighlight			{ background-color: #FDB4FF; }
+.CLFConvictionCLFHighlight					{ background-color: #D9D8A0; }
+.CLFCreditRatingCLFHighlight				{ background-color: #FBDAA5; }
+.CLFEmployeeOfCLFHighlight					{ background-color: #A0E6EF; }
+.CLFFDAPhaseCLFHighlight					{ background-color: #E0DFB3; }
+.CLFFamilyRelationCLFHighlight				{ background-color: #EAEBA0; }
+.CLFFinancialTransactionCLFHighlight		{ background-color: #FFBEBB; }
+.CLFIndictmentCLFHighlight					{ background-color: #FE7FB4; }
+.CLFJointVentureCLFHighlight				{ background-color: #B37FFE; }
+.CLFLeaderOfCLFHighlight					{ background-color: #7FD4FE; }
+.CLFManagementChangeCLFHighlight			{ background-color: #FF7FD9; }
+.CLFMemberOfCLFHighlight					{ background-color: #7FFEB1; }
+.CLFMergerCLFHighlight						{ background-color: #FEB57F; }
+.CLFMoneyLaunderingCLFHighlight				{ background-color: #FF7F7F; }
+.CLFPercentTrendCLFHighlight				{ background-color: #D6FE7F; }
+.CLFPersonCommunicationCLFHighlight			{ background-color: #BF7FFF; }
+.CLFPersonDetailsCLFHighlight				{ background-color: #FEEA7F; }
+.CLFPersonEducationCLFHighlight				{ background-color: #7FFEFE; }
+.CLFPersonPoliticalCLFHighlight				{ background-color: #94FE7F; }
+.CLFPersonPoliticalPastCLFHighlight			{ background-color: #FFD97F; }
+.CLFPersonProfessionalCLFHighlight			{ background-color: #7FB0FE; }
+.CLFPersonProfessionalPastCLFHighlight		{ background-color: #D67FFE; }
+.CLFPersonTravelCLFHighlight				{ background-color: #FE7FEA; }
+.CLFProductIssuesCLFHighlight				{ background-color: #FB898B; }
+.CLFProductRecallCLFHighlight				{ background-color: #F69EFD; }
+.CLFProductReleaseCLFHighlight				{ background-color: #FF86C4; }
+.CLFStockSplitCLFHighlight					{ background-color: #E7BB98; }
+.CLFTechnologyOwnershipCLFHighlight			{ background-color: #C3AB99; }
+.CLFTrialCLFHighlight						{ background-color: #FDCF87; }
+/* Sidebar Entities: */
+.CLFSBAnyTerm							{ border-bottom: double #E9EA87; }
+.CLFSBCategCity							{ border-bottom: double #00FE64; }
+.CLFSBCategCompany						{ border-bottom: double #FE6C00; }
+.CLFSBCategContinent					{ border-bottom: double #FF0000; }
+.CLFSBCategCountry						{ border-bottom: double #AEFE00; }
+.CLFSBCategDate							{ border-bottom: double #E7904A; }
+.CLFSBCategEmailAddress					{ border-bottom: double #FED700; }
+.CLFSBCategFunctionEvent				{ border-bottom: double #00FEFE; }
+.CLFSBCategHoliday						{ border-bottom: double #2BFE00; }
+.CLFSBCategIndustryTerm					{ border-bottom: double #FFB400; }
+.CLFSBCategMoneyAmount					{ border-bottom: double #0063FE; }
+.CLFSBCategNaturalFeature				{ border-bottom: double #AF00FE; }
+.CLFSBCategOrganization					{ border-bottom: double #FE00D6; }
+.CLFSBCategOrganizationDescription		{ border-bottom: double #FB171B; }
+.CLFSBCategPerson						{ border-bottom: double #8000FF; }
+.CLFSBCategPersonDescription			{ border-bottom: double #FF0D89; }
+.CLFSBCategPhoneNumber					{ border-bottom: double #EF3FFD; }
+.CLFSBCategProduct						{ border-bottom: double #C39370; }
+.CLFSBCategProvinceOrState				{ border-bottom: double #00FE64; }
+.CLFSBCategRegion						{ border-bottom: double #FE6C00; }
+.CLFSBCategTechnology					{ border-bottom: double #FF0000; }
+.CLFSBCategTime							{ border-bottom: double #AEFE00; }
+.CLFSBCategURL							{ border-bottom: double #8000FF; }
+.CLFSBCategWeapon						{ border-bottom: double #FED700; }
+/* Exceptional Terms */
+.CLFSBCategAddress						{ border-bottom: double #E9EA87; }
+.CLFSBCategDocReportPeriod				{ border-bottom: double #E9EA87; }
+.CLFSBCategDocType						{ border-bottom: double #E9EA87; }
+/* Sidebar Events & Facts */
+.CLFSBAnyEvent							{ background-color: #FEFF99; }
+.CLFSBCategAcquisition					{ background-color: #7FFEB1; }
+.CLFSBCategAlliance						{ background-color: #FEB57F; }
+.CLFSBCategAnalystEarningsEstimate		{ background-color: #FF7F7F; }
+.CLFSBCategAnalystRecommendation		{ background-color: #D6FE7F; }
+.CLFSBCategArrest						{ background-color: #BF7FFF; }
+.CLFSBCategBankruptcy					{ background-color: #FEEA7F; }
+.CLFSBCategBusinessRelation				{ background-color: #7FFEFE; }
+.CLFSBCategBuybacks						{ background-color: #94FE7F; }
+.CLFSBCategCompanyAffiliates			{ background-color: #FFD97F; }
+.CLFSBCategCompanyCustomer				{ background-color: #7FB0FE; }
+.CLFSBCategCompanyEarningsAnnouncement	{ background-color: #D67FFE; }
+.CLFSBCategCompanyEarningsGuidance		{ background-color: #FE7FEA; }
+.CLFSBCategCompanyIndustry				{ background-color: #FB898B; }
+.CLFSBCategCompanyInvestment			{ background-color: #F69EFD; }
+.CLFSBCategCompanyLegalIssues			{ background-color: #FF86C4; }
+.CLFSBCategCompanyLocation				{ background-color: #E7BB98; }
+.CLFSBCategCompanyProduct				{ background-color: #C3AB99; }
+.CLFSBCategCompanySynonym				{ background-color: #FDCF87; }
+.CLFSBCategCompanyTechnology			{ background-color: #B5BDF3; }
+.CLFSBCategCompanyTicker				{ background-color: #A4D2DE; }
+.CLFSBCategCompanyUsingProduct			{ background-color: #FDB4FF; }
+.CLFSBCategConviction					{ background-color: #D9D8A0; }
+.CLFSBCategCreditRating					{ background-color: #FBDAA5; }
+.CLFSBCategEmployeeOf					{ background-color: #A0E6EF; }
+.CLFSBCategFDAPhase						{ background-color: #E0DFB3; }
+.CLFSBCategFamilyRelation				{ background-color: #EAEBA0; }
+.CLFSBCategFinancialTransaction			{ background-color: #FFBEBB; }
+.CLFSBCategIndictment					{ background-color: #FE7FB4; }
+.CLFSBCategJointVenture					{ background-color: #B37FFE; }
+.CLFSBCategLeaderOf						{ background-color: #7FD4FE; }
+.CLFSBCategManagementChange				{ background-color: #FF7FD9; }
+.CLFSBCategMemberOf						{ background-color: #7FFEB1; }
+.CLFSBCategMerger						{ background-color: #FEB57F; }
+.CLFSBCategMoneyLaundering				{ background-color: #FF7F7F; }
+.CLFSBCategPercentTrend					{ background-color: #D6FE7F; }
+.CLFSBCategPersonCommunication			{ background-color: #BF7FFF; }
+.CLFSBCategPersonDetails				{ background-color: #FEEA7F; }
+.CLFSBCategPersonEducation				{ background-color: #7FFEFE; }
+.CLFSBCategPersonPolitical				{ background-color: #94FE7F; }
+.CLFSBCategPersonPoliticalPast			{ background-color: #FFD97F; }
+.CLFSBCategPersonProfessional			{ background-color: #7FB0FE; }
+.CLFSBCategPersonProfessionalPast		{ background-color: #D67FFE; }
+.CLFSBCategPersonTravel					{ background-color: #FE7FEA; }
+.CLFSBCategProductIssues				{ background-color: #FB898B; }
+.CLFSBCategProductRecall				{ background-color: #F69EFD; }
+.CLFSBCategProductRelease				{ background-color: #FF86C4; }
+.CLFSBCategStockSplit					{ background-color: #E7BB98; }
+.CLFSBCategTechnologyOwnership			{ background-color: #C3AB99; }
+.CLFSBCategTrial						{ background-color: #FDCF87; }

@@ -13,27 +13,7 @@ $args = array(
   'screen_name'  => '_andrew_allen_', //$_GET['screen_name'],
 );
 
-$results = array();
 
-$tmhOAuth->request(
-'GET',
-'http://api.twitter.com/1/statuses/user_timeline.json',
-$args,
-false
-);
-
-//echo "Received page {$i}\t{$tmhOAuth->url}" . PHP_EOL;
-
-if ($tmhOAuth->response['code'] == 200) {
-$data = json_decode($tmhOAuth->response['response'], true);
-//print_r($tmhOAuth->response['response']);
-$results = array_merge($results, $data['results']);
-} else {
-$data = htmlentities($tmhOAuth->response['response']);
-echo 'There was an error.' . PHP_EOL;
-var_dump($data);
-die();
-}
 $results = file_get_contents('http://api.twitter.com/1/statuses/user_timeline.json?screen_name=_andrew_allen_');
 $results = json_decode($results);
 echo '<pre>';
@@ -41,3 +21,16 @@ print_r($results);
 echo '</pre>'
 
 ?>
+
+<table id="user-table" style="width:100%;">
+          <tr>
+            <td><h4>Tweets</h4></td>
+            
+          </tr>
+          <tr style="border-top:1px solid #e8e8e8; border-bottom:1px solid #e8e8e8;">
+            <td><?php echo "<img src='$resp->profile_image_url' />"; ?></td>
+            <td><div><?php echo '<strong>'.$resp->name.'</strong>';?></div>I need a tweet to test a twitter app... so here it is</td>
+          </tr>
+
+
+        </table>
