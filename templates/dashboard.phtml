@@ -91,7 +91,7 @@
         <table id="user-table" style="width:100%;">
           <tr>
             <td><img src="{{profile_image_url}}"</td>
-            <td><strong>{{name}}<br/>{{location}}</td>
+            <td><strong>{{name}}</strong><br/>{{location}}</td>
           </tr>
           <tr style="border-top:1px solid #e8e8e8; border-bottom:1px solid #e8e8e8;">
             <td><strong>{{tweets_count}}</strong><br/>Tweets</td>
@@ -112,24 +112,8 @@
 
       </div> <!-- span3 -->
 
-      <div class="span3 well" style="padding:0;height:350px;overflow:auto;">
-        <table id="user-table" style="width:100%;">
-          <tr>
-            <td><h4>Tweets</h4></td>
-            
-          </tr>
-          <?php foreach ($user_tweets as $tweet): ?>
-          <tr style="border-top:1px solid #e8e8e8; border-bottom:1px solid #e8e8e8;">
-            <td>
-              <img src="{{profile_image_url}}" />
-            </td>
-            <td>
-              <div><strong>{{name}}</strong></div>
-              <?php echo $tweet->text; ?></td>
-          </tr>
-          <?php endforeach; ?>
-
-        </table>
+      <div id="usertimeline" class="span3 well" style="padding:0;height:350px;overflow:auto;">
+       
 
       </div> <!-- span3 -->
     </div>

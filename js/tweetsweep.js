@@ -5,25 +5,60 @@ $.ajaxSetup ({
   
 //Variables
 
+//On Page Load:
+$(document).ready(function() {
+  updateUserTimeline();
 
-//  Search bar results
-function search(q){
-  var ajax_load = "<img src='img/bird-loader.gif' alt='loading...' style='margin-top:170px;margin-left:235px;' />";
-  var loadUrl = "ajax/search.php";
-  var pages = $('#amount').val();
-  $("#result").html(ajax_load).load(loadUrl, "q="+q+"&pages="+pages, function(){
-    assignAdds();
+  //Attach search bar to search function
+  $("#search-form").submit(function(e){
+    var query = $('#search-form input').val();
+    e.preventDefault();
+    search(query);
   });
-};
 
-$("#search-form").submit(function(e){
-  var query = $('#search-form input').val();
-  e.preventDefault();
-  search(query);
-  
+  //responsive features of typing in the composition area
+  $('#composition-textarea').live('keyup',function(){
+    var charsRemaining = $('#chars-remaining');
+    var prevChars = parseInt(charsRemaining.text());
+    var currentChars = $(this).val().length;
+    charsRemaining.text(140 - currentChars);
+    if (currentChars>0) {
+      $('#tweet-btn').removeClass('disabled');
+    }else{
+      $('#tweet-btn').addClass('disabled');
+    };
+  });
+
+
+  //execute tweet on click of tweet button
+  $('#tweet-btn').click(function() {
+    var status = $('#composition-textarea').val();
+
+    $.post(
+        'ajax/tweet.php',
+        { status: status },
+        function() {
+          updateUserTimeline();
+        },
+        "html"
+      );
+  });
+
+  //check composition area for links and ajax them to nlp.php
+  $('#composition-textarea').change(function() {
+    var ajax_load = '<img src="img/ajax-loader.gif"/>';
+    var url = $(this).val();
+    var loadUrl = 'ajax/nlp.php';
+    $("#tags").html(ajax_load).load(loadUrl, "url="+url, function(){
+        checkboxTree();
+      });
+  });
+
+
+
 });
 
-
+//jQuery UI
 // # results slider 
 $(function() {
 $( "#slider" ).slider({
@@ -37,6 +72,21 @@ $( "#slider" ).slider({
 });
 $( "#amount" ).val(  $( "#slider" ).slider( "value" ) );
 });
+
+
+/*
+ * Description: search twitter for a query string and ajax the results to the #result div
+ * Inputs: string q
+ * Outputs: none
+ */
+function search(q){
+  var ajax_load = "<img src='img/bird-loader.gif' alt='loading...' style='margin-top:170px;margin-left:235px;' />";
+  var loadUrl = "ajax/search.php";
+  var pages = $('#amount').val();
+  $("#result").html(ajax_load).load(loadUrl, "q="+q+"&pages="+pages, function(){
+    assignAdds();
+  });
+};
 
 
 /*
@@ -62,45 +112,10 @@ function assignAdds () {
   });
 }
 
-//responsive features of typing in the composition area
-$('#composition-textarea').live('keyup',function(){
-  var charsRemaining = $('#chars-remaining');
-  var prevChars = parseInt(charsRemaining.text());
-  var currentChars = $(this).val().length;
-  charsRemaining.text(140 - currentChars);
-  if (currentChars>0) {
-    $('#tweet-btn').removeClass('disabled');
-  }else{
-    $('#tweet-btn').addClass('disabled');
-  };
-});
-
-//execute tweet on click of tweet button
-$('#tweet-btn').click(function() {
-  var status = $('#composition-textarea').val();
-
-  $.post(
-      'ajax/tweet.php',
-      { status: status },
-      function() {alert('success!');},
-      "html"
-    );
-});
-
-//check composition area for links and ajax them to nlp.php
-$('#composition-textarea').change(function() {
-  var ajax_load = '<img src="img/ajax-loader.gif"/>';
-  var url = $(this).val();
-  var loadUrl = 'ajax/nlp.php';
-  $("#tags").html(ajax_load).load(loadUrl, "url="+url, function(){
-      checkboxTree();
-    });
-});
-
 /*
  * Description: Makes the tag textbox tree expandable & collapsable
- * Inputs:
- * Outputs:
+ * Inputs: none
+ * Outputs: none
  */
 function checkboxTree(){
   $('#tags > ul  ul').hide();
@@ -121,6 +136,22 @@ function checkboxTree(){
     search($(this).data("content"));
   });
 }
+
+/*
+ * Description: update the user timeline by issuing an ajax call to usertimeline.php
+ * Inputs: none
+ * Outputs: none
+ */
+function updateUserTimeline () {
+  var ajax_load = "<img src='img/ajax-loader.gif' alt='loading...' style='margin-top:170px;margin-left:235px;' />";
+  var loadUrl = "ajax/usertimeline.php";
+  $("#usertimeline").html(ajax_load).load(loadUrl, "q=", function(){
+    //assignAdds();
+  });
+}
+
+//Graveyard
+
 /*
  * Description: 
  * Inputs:

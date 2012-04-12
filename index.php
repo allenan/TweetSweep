@@ -11,6 +11,7 @@ if (isset($_SESSION['access_token']) ) {
   $template = $twig->loadTemplate('dashboard.phtml');
   $params = array(
       'name' => $resp->name,
+      'location' => $resp->location,
       'profile_image_url' => $resp->profile_image_url,
       'tweets_count' => $resp->statuses_count,
       'following_count' => $resp->friends_count,
