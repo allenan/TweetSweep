@@ -6,7 +6,7 @@
 * Copyright (c) 2012 Dan Grossman
 * http://www.dangrossman.info
 *
-* Please see http://www.dangrossman.info/open-calais-tags
+* Please see    
 * for documentation and license information.
 */
 
@@ -26,9 +26,12 @@ class OpenCalais {
     public $allowSearch = false;
     public $externalID = '';
     public $submitter = '';
+    public $complexParse = true;
 
     private $document = '';
     private $entities = array();
+    private $complexEntities = array();
+    //private $res = '';
 
     public function OpenCalais($api_key) {
         if (empty($api_key)) {
@@ -93,38 +96,76 @@ class OpenCalais {
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
         curl_setopt($ch, CURLOPT_POST, 1);
         $response = curl_exec($ch);
+        $this->res = $response;
 
         if (strpos($response, "<Exception>") !== false) {
             $text = preg_match("/<Exception\>(.*)<\/Exception>/mu", $response, $matches);
             throw new OpenCalaisException($matches[1]);
         }
-    
-        //Parse out the entities
-        $lines = explode("\n", $response);
-        $start = false;
-        foreach ($lines as $line) {
-            if (strpos($line, '-->') === 0) {
-                break;
-            } elseif (strpos($line, '<!--') !== 0) {
-                $parts = explode(':', $line);
-                $type = $parts[0];
-                $entities = explode(',', $parts[1]);
-                foreach ($entities as $entity) {
-                    if (strlen(trim($entity)) > 0)
-                        $this->entities[$type][] = trim($entity);
-                }
-            }
-        }
 
-        //Parse out the social tags
-        if (strpos($response, '<SocialTag ') !== false) {
-            preg_match_all('/<SocialTag [^>]*>([^<]*)<originalValue>/', $response, $matches);
-            if (is_array($matches) && is_array($matches[1]) && count($matches[1]) > 0) {
-                foreach ($matches[1] as $tag) {
-                    $this->entities['SocialTag'][] = trim($tag);
+        if ($this->complexParse) {
+            //Complex Parse
+        $p = xml_parser_create();
+        xml_parse_into_struct($p, $response, $vals, $index);
+        xml_parser_free($p);
+
+        $forbidden_keys = array("OPENCALAISSIMPLE","DESCRIPTION","ALLOWDISTRIBUTION","ALLOWSEARCH","CALAISREQUESTID","ID","ABOUT","DOCTITLE","DOCDATE","EXTERNALMETADATA","CALAISSIMPLEOUTPUTFORMAT","SOCIALTAGS","TOPIC","TOPICS","ORIGINALVALUE");
+
+        foreach ($index as $i_key => $i_value) {
+            if (!in_array($i_key, $forbidden_keys)) {
+                foreach ($i_value as $iv_key => $iv_value) {
+                    if ($vals[$iv_value]['tag'] == 'SOCIALTAG' && $vals[$iv_value]['type'] == 'open') {
+                        $this->entities[$i_key][] = array(
+                        'name' => $vals[$iv_value]['value'],
+                        'importance' => $vals[$iv_value]['attributes']['IMPORTANCE']
+                        
+                        );
+                    } elseif ($vals[$iv_value]['type'] != 'close') {
+                        $this->entities[$i_key][] = array(
+                        'name' => $vals[$iv_value]['value'],
+                        'count' => $vals[$iv_value]['attributes']['COUNT'],
+                        'relevancy' => $vals[$iv_value]['attributes']['RELEVANCE'],
+                        //'index' => $iv_value
+                    );
+                    }
+                    
                 }
             }
         }
+        } else {
+            //Parse out the entities
+            $lines = explode("\n", $response);
+            $start = false;
+            foreach ($lines as $line) {
+                if (strpos($line, '-->') === 0) {
+                    break;
+                } elseif (strpos($line, '<!--') !== 0) {
+                    $parts = explode(':', $line);
+                    $type = $parts[0];
+                    $entities = explode(',', $parts[1]);
+                    foreach ($entities as $entity) {
+
+                        if (strlen(trim($entity)) > 0)
+                            $this->entities[$type][] = trim($entity);
+                    }
+                }
+            }
+
+            
+
+            //Parse out the social tags
+            if (strpos($response, '<SocialTag ') !== false) {
+                preg_match_all('/<SocialTag [^>]*>([^<]*)<originalValue>/', $response, $matches);
+                if (is_array($matches) && is_array($matches[1]) && count($matches[1]) > 0) {
+                    foreach ($matches[1] as $tag) {
+                        $this->entities['SocialTag'][] = trim($tag);
+                    }
+                }
+            }
+        }
+        
+    
+        
 
     }
 

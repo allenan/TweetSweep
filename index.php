@@ -352,7 +352,7 @@ if ( isset($_REQUEST['wipe'])) {
     //  load() functions
       function search(q){
         var ajax_load = "<img src='img/bird-loader.gif' alt='loading...' style='margin-top:170px;margin-left:235px;' />";
-        var loadUrl = "search2.php";
+        var loadUrl = "ajax/search.php";
         var pages = $('#amount').val();
         $("#result").html(ajax_load).load(loadUrl, "q="+q+"&pages="+pages, function(){
           assignAdds();
@@ -428,7 +428,7 @@ if ( isset($_REQUEST['wipe'])) {
       var status = $('#composition-textarea').val();
 
       $.post(
-          'tweet.php',
+          'ajax/tweet.php',
           { status: status },
           function() {alert('success!');},
           "html"
@@ -439,7 +439,7 @@ if ( isset($_REQUEST['wipe'])) {
     $('#composition-textarea').change(function() {
       var ajax_load = '<img src="img/ajax-loader.gif"/>';
       var url = $(this).val();
-      var loadUrl = 'nlp.php';
+      var loadUrl = 'ajax/nlp.php';
       $("#tags").html(ajax_load).load(loadUrl, "url="+url, function(){
           checkboxTree();
         });

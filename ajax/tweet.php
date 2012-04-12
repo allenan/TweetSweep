@@ -22,8 +22,8 @@
 
 session_start();
 
-require 'lib/tmhOAuth.php';
-require 'lib/tmhUtilities.php';
+require '../lib/tmhOAuth.php';
+require '../lib/tmhUtilities.php';
 
 $tmhOAuth = new tmhOAuth(array(
   'consumer_key'    => 'Fq2XgU0Rje9IXtNxsjQCQ',

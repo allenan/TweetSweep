@@ -2,9 +2,9 @@
 
 date_default_timezone_set('UTC');
 
-require 'lib/tmhOAuth.php';
-require 'lib/tmhUtilities.php';
-require 'lib/TweetSweep.php';
+require '../lib/tmhOAuth.php';
+require '../lib/tmhUtilities.php';
+require '../lib/TweetSweep.php';
 $tmhOAuth = new tmhOAuth(array());
 $tweetSweep = new TweetSweep();
 
