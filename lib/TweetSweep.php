@@ -12,13 +12,22 @@ class TweetSweep
 		$this->userMentionStruct = array();
 	}
 
-	function addHashtag($hashtag)
+	function addHashtag($hashtag, $date, $from_user)
 	{
+		$date = $this->roundDate($date);
 		//see if hashtag exists in the struct
 		if (array_key_exists($hashtag, $this->hashtagStruct)) 
 		{
 			//if it does, then append its count
 			$this->hashtagStruct[$hashtag]['count'] = $this->hashtagStruct[$hashtag]['count'] + 1;
+			if ($i = array_search($date, $this->hashtagStruct[$hashtag])) {
+				echo $i;
+			} else {
+				echo 'not found';
+			}
+			
+			$this->hashtagStruct[$hashtag]['times'][strval($date)] = array('time' => $date, 'realtime' => date("h:i:s A T, M jS, Y", $date), 'count' => $this->hashtagStruct[$hashtag]['times'][strval($date)]['count'] + 1);
+			$this->hashtagStruct[$hashtag]['users'][] = $from_user;
 		}
 		else
 		{
@@ -26,6 +35,8 @@ class TweetSweep
 			$this->hashtagStruct = array_merge($this->hashtagStruct, array(
 				$hashtag => array('text' => $hashtag, 'count' => 1)
 			));
+			$this->hashtagStruct[$hashtag]['times'][strval($date)] = array('time' => $date, 'realtime' => date("h:i:s A T, M jS, Y", $date), 'count' => 1);
+			$this->hashtagStruct[$hashtag]['users'][] = $from_user;
 		}
 	}
 
@@ -63,7 +74,10 @@ class TweetSweep
 		return array_pop($this->hashtagStruct);
 	}
 
-	
+	function roundDate($date){
+		//round down to hour
+		return $date - ($date % 3600);
+	}
 
 
 

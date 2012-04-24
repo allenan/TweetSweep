@@ -1,4 +1,17 @@
+<!-- <pre> -->
+<?php 
+  //session_start();
+  //$_SESSION['var_cache'] = serialize($tweetSweep->hashtagStruct);
+  //print_r(unserialize($_SESSION['var_cache']));
+  //echo $test[5] = 1;
+
+  ?>
+<!-- </pre> -->
+ <?php// die();?>
+
 <?php
+
+
 
 date_default_timezone_set('UTC');
 
@@ -8,9 +21,11 @@ require '../lib/TweetSweep.php';
 $tmhOAuth = new tmhOAuth(array());
 $tweetSweep = new TweetSweep();
 
-$pages = ((int)$_GET['pages'])/100;
+$pages = (isset($_GET['pages'])) ? ((int)$_GET['pages'])/100 : 5 ;
+//$pages = ((int)$_GET['pages'])/100;
+$q = (isset($_GET['q'])) ? $_GET['q'] : "blackhawks" ;
 $args = array(
-  'q'        => $_GET['q'],
+  'q'        => $q,
   'since_id' => '0',
   'rpp'      => '100',
   'lang'     => 'en',
@@ -43,15 +58,18 @@ for ($i=$pages; $i > 0; $i--) {
   }
 }
 
+//$memcache = new Memcache;
+//$memcache->connect('localhost', 11211) or die ("Could not connect");
+
 foreach ($results as $result) {
-  //$date = strtotime($result['created_at']);
-  //$result['from_user'] = str_pad($result['from_user'], 15, ' ');
+  $date = strtotime($result['created_at'])*1000;
+  $from_user = $result['from_user_id'];
   //$result['text'] = str_replace(PHP_EOL, '', $result['text']);
   //print_r($result);
   //echo "{$result['id_str']}\t{$date}\t{$result['from_user']}\t\t{$result['text']}" . PHP_EOL;
   foreach ($result['entities']['hashtags'] as $hashtag ) {
     if ($hashtag['text'] != '') {
-      $tweetSweep->addHashtag($hashtag['text']);
+      $tweetSweep->addHashtag($hashtag['text'], $date, $from_user);
       //echo $hashtag['text'];
       //echo '<br/>';
     } 
@@ -67,6 +85,17 @@ foreach ($results as $result) {
 $tweetSweep->sortHashtags();
 $tweetSweep->sortUserMentions();
 ?>
+
+<pre>
+<?php 
+  //session_start();
+  $_SESSION['var_cache'] = serialize($tweetSweep->hashtagStruct);
+  //print_r(unserialize($_SESSION['var_cache']));
+  //echo $test['hello'] + 1;
+
+  ?>
+</pre>
+ <?php die();?>
 
 <h1>Results for <?php echo $args['q'];?></h1>
 <p>Based on <?php echo $args['rpp']*$pages; ?> recent tweets</p>
@@ -120,6 +149,4 @@ $tweetSweep->sortUserMentions();
 </tbody>
 </table>
 </div> 
-<!-- <pre> -->
-<?php //print_r($results);?>
- <!-- </pre>  -->
+

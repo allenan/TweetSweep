@@ -1,4 +1,5 @@
 <?php
+
 require_once 'lib/Twig/lib/Twig/Autoloader.php';
 Twig_Autoloader::register();
 $loader = new Twig_Loader_Filesystem('templates');
@@ -6,8 +7,35 @@ $twig = new Twig_Environment($loader, array());
 
 include_once 'lib/auth.php';
 
+$alphaKey = "123abc";
+$page = (isset($_GET['p'])) ? $_GET['p'] : 'home';
 
-if (isset($_SESSION['access_token']) ) {
+$root = '/tweetsweep';
+$navigation[] = array('page' => 'home', 'href' => $root, 'caption' => 'Home');
+$navigation[] = array('page' => 'about', 'href' => $root.'?p=about', 'caption' => 'About');
+$navigation[] = array('page' => 'contact', 'href' => $root.'?p=contact', 'caption' => 'Contact');
+$vars = array(
+  'root' => $root,
+  'alpha' => $_GET['pw'] == $alphaKey,
+  'page' => $page,
+  'navigation' => $navigation,
+);
+
+
+
+
+if ($page != 'home') {
+  if (file_exists('templates/'.$page.'.phtml')) {
+    $template = $twig->loadTemplate($page.'.phtml');
+    $template->display($vars);
+  } else {
+    //TODO: make this load a 404 file
+    $template = $twig->loadTemplate('home.phtml');
+    $template->display($vars);
+  }
+}
+
+elseif (isset($_SESSION['access_token']) ) {
   $template = $twig->loadTemplate('dashboard.phtml');
   $params = array(
       'name' => $resp->name,
@@ -17,11 +45,12 @@ if (isset($_SESSION['access_token']) ) {
       'following_count' => $resp->friends_count,
       'followers_count' => $resp->followers_count
   );
-  $template->display($params);
-} else {
-  $template = $twig->loadTemplate('home.phtml');
+  $template->display(array_merge($params,$vars));
+} 
 
-  $template->display(array());
+else {
+  $template = $twig->loadTemplate('home.phtml');
+  $template->display($vars);
 }
 
 

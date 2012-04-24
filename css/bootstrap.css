@@ -1,3 +1,9 @@
+/*Fixes*/
+.add-on{
+  margin-top:-9px;
+  margin-right:-5px !important;
+}
+
 /*!
  * Bootstrap v2.0.2
  *
