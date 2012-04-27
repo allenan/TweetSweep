@@ -86,16 +86,16 @@ $tweetSweep->sortHashtags();
 $tweetSweep->sortUserMentions();
 ?>
 
-<pre>
+<!-- <pre> -->
 <?php 
   //session_start();
-  $_SESSION['var_cache'] = serialize($tweetSweep->hashtagStruct);
+  //$_SESSION['var_cache'] = serialize($tweetSweep->hashtagStruct);
   //print_r(unserialize($_SESSION['var_cache']));
   //echo $test['hello'] + 1;
 
   ?>
-</pre>
- <?php die();?>
+<!-- </pre> -->
+ <?php //die();?>
 
 <h1>Results for <?php echo $args['q'];?></h1>
 <p>Based on <?php echo $args['rpp']*$pages; ?> recent tweets</p>

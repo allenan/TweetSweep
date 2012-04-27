@@ -21,9 +21,9 @@ class TweetSweep
 			//if it does, then append its count
 			$this->hashtagStruct[$hashtag]['count'] = $this->hashtagStruct[$hashtag]['count'] + 1;
 			if ($i = array_search($date, $this->hashtagStruct[$hashtag])) {
-				echo $i;
+				//echo $i;
 			} else {
-				echo 'not found';
+				//echo 'not found';
 			}
 			
 			$this->hashtagStruct[$hashtag]['times'][strval($date)] = array('time' => $date, 'realtime' => date("h:i:s A T, M jS, Y", $date), 'count' => $this->hashtagStruct[$hashtag]['times'][strval($date)]['count'] + 1);
