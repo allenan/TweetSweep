@@ -45,7 +45,7 @@ $(document).ready(function() {
   });
 
   //check composition area for links and ajax them to nlp.php
-  $('#composition-textarea').change(function() {
+  $('.link-input').change(function() {
     var ajax_load = '<img src="img/ajax-loader.gif"/>';
     var url = $(this).val();
     var loadUrl = 'ajax/nlp.php';
@@ -86,6 +86,12 @@ function search(q){
   $("#result").html(ajax_load).load(loadUrl, "q="+q+"&pages="+pages, function(){
     assignAdds();
   });
+  var scriptUrl = "js/flot-tweetsweep.php";  
+
+  $.getScript(scriptUrl, function(){  
+      plotTime();
+  });  
+ 
 };
 
 

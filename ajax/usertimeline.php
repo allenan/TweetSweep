@@ -1,4 +1,7 @@
 <?php
+session_start();
+// print_r($_SESSION);
+// die();
 
 date_default_timezone_set('UTC');
 
@@ -19,7 +22,7 @@ $tmhOAuth->config['user_secret'] = $_SESSION['access_token']['oauth_token_secret
 $code = $tmhOAuth->request('GET', $tmhOAuth->url('1/statuses/user_timeline'), array(
   'include_entities' => '1',
   'include_rts'      => '1',
-  'screen_name'      => '_andrew_allen_', //$_GET['screen_name'],
+  'screen_name'      => $_SESSION['access_token']['screen_name'],
   'count'            => 20,
 ));
 

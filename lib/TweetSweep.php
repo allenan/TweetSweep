@@ -20,14 +20,19 @@ class TweetSweep
 		{
 			//if it does, then append its count
 			$this->hashtagStruct[$hashtag]['count'] = $this->hashtagStruct[$hashtag]['count'] + 1;
-			if ($i = array_search($date, $this->hashtagStruct[$hashtag])) {
-				//echo $i;
+			if (array_key_exists($date, $this->hashtagStruct[$hashtag]['times'])) {
+				//echo "it's here<br/>";
+				//If the time is already a key, then increment it
+				$this->hashtagStruct[$hashtag]['times'][strval($date)] = array('time' => $date, 'realtime' => date("h:i:s A T, M jS, Y", $date), 'count' => $this->hashtagStruct[$hashtag]['times'][strval($date)]['count'] + 1);
+				$this->hashtagStruct[$hashtag]['users'][] = $from_user;
 			} else {
-				//echo 'not found';
+				//echo 'not found<br/>';
+				//It the key is not defined, make a new time
+				$this->hashtagStruct[$hashtag]['times'][strval($date)] = array('time' => $date, 'realtime' => date("h:i:s A T, M jS, Y", $date), 'count' => 1);
+				$this->hashtagStruct[$hashtag]['users'][] = $from_user;
 			}
 			
-			$this->hashtagStruct[$hashtag]['times'][strval($date)] = array('time' => $date, 'realtime' => date("h:i:s A T, M jS, Y", $date), 'count' => $this->hashtagStruct[$hashtag]['times'][strval($date)]['count'] + 1);
-			$this->hashtagStruct[$hashtag]['users'][] = $from_user;
+			
 		}
 		else
 		{
@@ -35,6 +40,7 @@ class TweetSweep
 			$this->hashtagStruct = array_merge($this->hashtagStruct, array(
 				$hashtag => array('text' => $hashtag, 'count' => 1)
 			));
+			//make a new time key/value
 			$this->hashtagStruct[$hashtag]['times'][strval($date)] = array('time' => $date, 'realtime' => date("h:i:s A T, M jS, Y", $date), 'count' => 1);
 			$this->hashtagStruct[$hashtag]['users'][] = $from_user;
 		}
@@ -75,8 +81,8 @@ class TweetSweep
 	}
 
 	function roundDate($date){
-		//round down to hour
-		return $date - ($date % 3600);
+		//round down to half hour
+		return $date - ($date % 1800);
 	}
 
 
