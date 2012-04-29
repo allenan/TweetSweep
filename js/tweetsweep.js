@@ -47,14 +47,17 @@ $(document).ready(function() {
   //check composition area for links and ajax them to nlp.php
   $('#composition-textarea').change(function() {
     var ajax_load = '<img src="img/ajax-loader.gif"/>';
+    var q = $(this).val();
+    search(q,"#result","tweet");
+  });
+  $('#inputIcon').change(function() {
+    var ajax_load = '<img src="img/ajax-loader.gif"/>';
     var url = $(this).val();
     var loadUrl = 'ajax/nlp.php';
     $("#tags").html(ajax_load).load(loadUrl, "url="+url, function(){
         checkboxTree();
       });
   });
-
-
 
 });
 
@@ -76,14 +79,14 @@ $( "#amount" ).val(  $( "#slider" ).slider( "value" ) );
 
 /*
  * Description: search twitter for a query string and ajax the results to the #result div
- * Inputs: string q
+ * Inputs: string q, string dest, string searchType
  * Outputs: none
  */
-function search(q){
+function search(q,dest,searchType){
   var ajax_load = "<img src='img/bird-loader.gif' alt='loading...' style='margin-top:170px;margin-left:235px;' />";
   var loadUrl = "ajax/search.php";
   var pages = $('#amount').val();
-  $("#result").html(ajax_load).load(loadUrl, "q="+q+"&pages="+pages, function(){
+  $(dest).html(ajax_load).load(loadUrl, "q="+q+"&pages="+pages+"&searchType="+searchType, function(){
     assignAdds();
   });
 };
@@ -133,7 +136,7 @@ function checkboxTree(){
       });
   });
   $('#tags ul input').change(function(){
-    search($(this).data("content"));
+    search($(this).data("content"),"#result2","article");
   });
 }
 

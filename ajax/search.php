@@ -24,6 +24,7 @@ $tweetSweep = new TweetSweep();
 $pages = (isset($_GET['pages'])) ? ((int)$_GET['pages'])/100 : 5 ;
 //$pages = ((int)$_GET['pages'])/100;
 $q = (isset($_GET['q'])) ? $_GET['q'] : "blackhawks" ;
+$searchType = (isset($_GET['searchType'])) ? $_GET['searchType'] : "something..." ;
 $args = array(
   'q'        => $q,
   'since_id' => '0',
@@ -97,7 +98,7 @@ $tweetSweep->sortUserMentions();
 <!-- </pre> -->
  <?php //die();?>
 
-<h1>Results for <?php echo $args['q'];?></h1>
+<h1>Results for <?php echo $searchType;?></h1>
 <p>Based on <?php echo $args['rpp']*$pages; ?> recent tweets</p>
 <div class="row">
   <div class="span3">
