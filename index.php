@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 require_once 'lib/Twig/lib/Twig/Autoloader.php';
 Twig_Autoloader::register();
 $loader = new Twig_Loader_Filesystem('templates');
@@ -21,7 +21,8 @@ $vars = array(
   'navigation' => $navigation,
 );
 
-
+//print_r($_SESSION);
+//die();
 
 
 if ($page != 'home') {

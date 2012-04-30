@@ -67,7 +67,7 @@
               <textarea class="" id="composition-textarea" rows="3" style="width:96%" placeholder="Compose new tweet..."></textarea>
               <div class="input-prepend">
                 <span class="add-on"><i class="icon-file"></i></span>
-                <input class="span2" id="inputIcon" type="text">
+                <input class="span2 link-input" id="inputIcon" type="text" style="width:220px">
               </div>
               <div style="text-align:right;">
                 <span id="chars-remaining">140</span>
@@ -130,11 +130,8 @@
     <script src="js/tweetsweep.js"></script>
     <script src="js/flot/jquery.flot.js"></script>
 
-    <script>
-      function plotTime(){
-        d = [[1009839600000], [1009847800000], [1009850000000],[1009869600000], [1019979600000]];
-        $.plot($("#flot"), [d], { xaxis: { mode: "time" } });
-      }
+    <script src="js/flot-tweetsweep.php">
+      
       
     </script>
    

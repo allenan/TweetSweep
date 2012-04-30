@@ -1,13 +1,13 @@
 <!-- <pre> -->
 <?php 
-  //session_start();
+  session_start();
   //$_SESSION['var_cache'] = serialize($tweetSweep->hashtagStruct);
   //print_r(unserialize($_SESSION['var_cache']));
   //echo $test[5] = 1;
 
   ?>
 <!-- </pre> -->
- <?php// die();?>
+
 
 <?php
 
@@ -58,11 +58,9 @@ for ($i=$pages; $i > 0; $i--) {
   }
 }
 
-//$memcache = new Memcache;
-//$memcache->connect('localhost', 11211) or die ("Could not connect");
 
 foreach ($results as $result) {
-  $date = strtotime($result['created_at'])*1000;
+  $date = strtotime($result['created_at']);
   $from_user = $result['from_user_id'];
   //$result['text'] = str_replace(PHP_EOL, '', $result['text']);
   //print_r($result);
@@ -89,13 +87,14 @@ $tweetSweep->sortUserMentions();
 <!-- <pre> -->
 <?php 
   //session_start();
-  //$_SESSION['var_cache'] = serialize($tweetSweep->hashtagStruct);
+  $_SESSION['var_cache'] = serialize($tweetSweep->hashtagStruct);
+  //print_r($_SESSION);
   //print_r(unserialize($_SESSION['var_cache']));
   //echo $test['hello'] + 1;
+  //print_r($tweetSweep->hashtagStruct);
 
   ?>
 <!-- </pre> -->
- <?php //die();?>
 
 <h1>Results for <?php echo $args['q'];?></h1>
 <p>Based on <?php echo $args['rpp']*$pages; ?> recent tweets</p>
