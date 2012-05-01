@@ -57,6 +57,9 @@ $(document).ready(function() {
     $("#tags").html(ajax_load).load(loadUrl, "url="+url, function(){
         checkboxTree();
       });
+    $.get("ajax/getTitle.php?url="+url,function(data){
+      search(data,"#result3","title");
+    });
   });
 
 });
@@ -136,7 +139,11 @@ function checkboxTree(){
       });
   });
   $('#tags ul input').change(function(){
-    search($(this).data("content"),"#result2","article");
+    var query = "";
+    $('input:checkbox:checked').each(function(){
+      query+= $(this).data("content")+" ";
+    });
+    search(query,"#result2","article");
   });
 }
 
