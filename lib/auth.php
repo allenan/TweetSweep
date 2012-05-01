@@ -1,4 +1,5 @@
 <?php
+//session_start();
 require 'lib/tmhOAuth.php';
 require 'lib/tmhUtilities.php';
 $tmhOAuth = new tmhOAuth(array(
@@ -7,7 +8,7 @@ $tmhOAuth = new tmhOAuth(array(
 ));
 
 $here = tmhUtilities::php_self();
-session_start();
+
 
 function outputError($tmhOAuth) {
   echo 'Error: ' . $tmhOAuth->response['response'] . PHP_EOL;

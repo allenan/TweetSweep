@@ -85,12 +85,14 @@ function search(q){
   var pages = $('#amount').val();
   $("#result").html(ajax_load).load(loadUrl, "q="+q+"&pages="+pages, function(){
     assignAdds();
+    plotTime();
   });
-  var scriptUrl = "js/flot-tweetsweep.php";  
 
-  $.getScript(scriptUrl, function(){  
-      plotTime();
-  });  
+  // var scriptUrl = "js/flot-tweetsweep.php";  
+
+  // $.getScript(scriptUrl, function(){  
+  //     plotTime();
+  // });  
  
 };
 

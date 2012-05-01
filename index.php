@@ -9,6 +9,7 @@ include_once 'lib/auth.php';
 
 $alphaKey = "123abc";
 $page = (isset($_GET['p'])) ? $_GET['p'] : 'home';
+$pw = (isset($_GET['pw'])) ? $_GET['pw'] : '' ;
 
 $root = '/tweetsweep';
 $navigation[] = array('page' => 'home', 'href' => $root, 'caption' => 'Home');
@@ -16,7 +17,7 @@ $navigation[] = array('page' => 'about', 'href' => $root.'?p=about', 'caption' =
 $navigation[] = array('page' => 'contact', 'href' => $root.'?p=contact', 'caption' => 'Contact');
 $vars = array(
   'root' => $root,
-  'alpha' => $_GET['pw'] == $alphaKey,
+  'alpha' => $pw == $alphaKey,
   'page' => $page,
   'navigation' => $navigation,
 );

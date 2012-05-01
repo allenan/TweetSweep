@@ -22,8 +22,9 @@ $tmhOAuth = new tmhOAuth(array());
 $tweetSweep = new TweetSweep();
 
 $pages = (isset($_GET['pages'])) ? ((int)$_GET['pages'])/100 : 5 ;
+//$pages = 12;
 //$pages = ((int)$_GET['pages'])/100;
-$q = (isset($_GET['q'])) ? $_GET['q'] : "blackhawks" ;
+$q = (isset($_GET['q'])) ? $_GET['q'] : "bieber" ;
 $args = array(
   'q'        => $q,
   'since_id' => '0',
@@ -33,6 +34,7 @@ $args = array(
 );
 
 $results = array();
+
 
 for ($i=$pages; $i > 0; $i--) {
   $args['page'] = $i;
@@ -92,9 +94,10 @@ $tweetSweep->sortUserMentions();
   //print_r(unserialize($_SESSION['var_cache']));
   //echo $test['hello'] + 1;
   //print_r($tweetSweep->hashtagStruct);
-
+ // print_r($results);
+//die();
   ?>
-<!-- </pre> -->
+<!-- </pre>  -->
 
 <h1>Results for <?php echo $args['q'];?></h1>
 <p>Based on <?php echo $args['rpp']*$pages; ?> recent tweets</p>
@@ -115,7 +118,7 @@ $tweetSweep->sortUserMentions();
 <?php foreach ($tweetSweep->hashtagStruct as $h): ?>
   <tr>
     <td><a class="add-btn" data-content="<?php echo $h['text']; ?>" data-prefix="#" href="#"><img src="img/add.png"/></a></td>
-    <td><a href="https://twitter.com/#!/search/<?php echo urlencode('#'.$h['text']); ?>" target="_blank"><?php echo '#'.$h['text']?></a></td>
+    <td><a class="hashtagInfo" data-toggle="modal" href="#myModal" target="_blank"><?php echo '#'.$h['text']?></a></td>
     <td><?php echo $h['count']?></td>
   </tr>
 <?php $i++;?>

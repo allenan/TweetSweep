@@ -81,8 +81,9 @@ class TweetSweep
 	}
 
 	function roundDate($date){
-		//round down to half hour
-		return $date - ($date % 1800);
+		//round down to half hour and change to cst
+		//return ($date - ($date % 1800)) - 6*(3600);
+		return ($date - ($date % 900)) - 6*(3600);
 	}
 
 
