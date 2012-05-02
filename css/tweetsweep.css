@@ -1,56 +1,55 @@
 .navbar-inner{
-	/*background-image: linear-gradient(right bottom, rgb(123,177,235) 29%, rgb(60,139,217) 68%, rgb(33,143,207) 82%);
-background-image: -o-linear-gradient(right bottom, rgb(123,177,235) 29%, rgb(60,139,217) 68%, rgb(33,143,207) 82%);
-background-image: -moz-linear-gradient(right bottom, rgb(123,177,235) 29%, rgb(60,139,217) 68%, rgb(33,143,207) 82%);
-background-image: -webkit-linear-gradient(right bottom, rgb(123,177,235) 29%, rgb(60,139,217) 68%, rgb(33,143,207) 82%);
-background-image: -ms-linear-gradient(right bottom, rgb(123,177,235) 29%, rgb(60,139,217) 68%, rgb(33,143,207) 82%);
+
+background-image: linear-gradient(bottom, rgb(50,112,179) 44%, rgb(158,205,255) 100%, rgb(118,171,227) 78%);
+background-image: -o-linear-gradient(bottom, rgb(50,112,179) 44%, rgb(158,205,255) 100%, rgb(118,171,227) 78%);
+background-image: -moz-linear-gradient(bottom, rgb(50,112,179) 44%, rgb(158,205,255) 100%, rgb(118,171,227) 78%);
+background-image: -webkit-linear-gradient(bottom, rgb(50,112,179) 44%, rgb(158,205,255) 100%, rgb(118,171,227) 78%);
+background-image: -ms-linear-gradient(bottom, rgb(50,112,179) 44%, rgb(158,205,255) 100%, rgb(118,171,227) 78%);
 
 background-image: -webkit-gradient(
 	linear,
 	right bottom,
-	left top,
-	color-stop(0.29, rgb(123,177,235)),
-	color-stop(0.68, rgb(60,139,217)),
-	color-stop(0.82, rgb(33,143,207))
-);*/
-/*
-background-image: linear-gradient(right bottom, rgb(137,188,245) 20%, rgb(64,153,255) 64%, rgb(64,153,255) 82%);
-background-image: -o-linear-gradient(right bottom, rgb(137,188,245) 20%, rgb(64,153,255) 64%, rgb(64,153,255) 82%);
-background-image: -moz-linear-gradient(right bottom, rgb(137,188,245) 20%, rgb(64,153,255) 64%, rgb(64,153,255) 82%);
-background-image: -webkit-linear-gradient(right bottom, rgb(137,188,245) 20%, rgb(64,153,255) 64%, rgb(64,153,255) 82%);
-background-image: -ms-linear-gradient(right bottom, rgb(137,188,245) 20%, rgb(64,153,255) 64%, rgb(64,153,255) 82%);
-
-background-image: -webkit-gradient(
-	linear,
-	right bottom,
-	left top,
-	color-stop(0.2, rgb(137,188,245)),
-	color-stop(0.64, rgb(64,153,255)),
-	color-stop(0.82, rgb(64,153,255))
-);*/
-background-image: linear-gradient(right bottom, rgb(98,154,214) 20%, rgb(52,119,191) 63%, rgb(61,123,189) 82%);
-background-image: -o-linear-gradient(right bottom, rgb(98,154,214) 20%, rgb(52,119,191) 63%, rgb(61,123,189) 82%);
-background-image: -moz-linear-gradient(right bottom, rgb(98,154,214) 20%, rgb(52,119,191) 63%, rgb(61,123,189) 82%);
-background-image: -webkit-linear-gradient(right bottom, rgb(98,154,214) 20%, rgb(52,119,191) 63%, rgb(61,123,189) 82%);
-background-image: -ms-linear-gradient(right bottom, rgb(98,154,214) 20%, rgb(52,119,191) 63%, rgb(61,123,189) 82%);
-
-background-image: -webkit-gradient(
-	linear,
-	right bottom,
-	left top,
-	color-stop(0.2, rgb(98,154,214)),
-	color-stop(0.63, rgb(52,119,191)),
-	color-stop(0.82, rgb(61,123,189))
+	right top,
+	color-stop(0.44, rgb(50,112,179)),
+	color-stop(1, rgb(158,205,255)),
+	color-stop(0.78, rgb(118,171,227))
 );
 }
 
+
+
+
 .divider-vertical{
-	background-color: white !important;
+	background-color: #3270b3 !important;
+	}
+
+.navbar .divider-vertical {
+height: 16px;
+width: 1px;
+margin: 12px 9px;
+overflow: hidden;
+background-color: white;
+border-right: 1px solid #6A98C8;
 }
 
+
 .navbar .nav .active > a, .navbar .nav .active > a:hover {
-	background-color: #218fcf !important;
-	}
+background-image: linear-gradient(bottom, rgb(50,112,179) 44%, rgb(43,96,153) 18%);
+background-image: -o-linear-gradient(bottom, rgb(50,112,179) 44%, rgb(43,96,153) 18%);
+background-image: -moz-linear-gradient(bottom, rgb(50,112,179) 44%, rgb(43,96,153) 18%);
+background-image: -webkit-linear-gradient(bottom, rgb(50,112,179) 44%, rgb(43,96,153) 18%);
+background-image: -ms-linear-gradient(bottom, rgb(50,112,179) 44%, rgb(43,96,153) 18%);
+
+background-image: -webkit-gradient(
+	linear,
+	left bottom,
+	left top,
+	color-stop(0.44, rgb(50,112,179)),
+	color-stop(0.18, rgb(43,96,153))
+);
+height: 24px;
+
+}
 	
 .navbar-search .search-query {
 	background-color: white;
@@ -58,23 +57,30 @@ background-image: -webkit-gradient(
 	}
 	
 .navbar-search .search-query:focus, .navbar-search .search-query.focused {
-	color: white;	
+	color: black;	
 }
 	
 
 .a{
-	color: #4099ff;
+	color: ;
 }
 
 .navbar .nav > li > a {
 float: none;
 padding: 10px 10px 11px;
-line-height: 26px;
-color: #999;
+line-height: 24px;
+color: white;
 text-decoration: none;
 text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-font-size: 1.1em;
+font-size: 1em;
+text-transform: uppercase;
 }
+
+ul {
+list-style: none;
+}
+
+
 
 
 
