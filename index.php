@@ -14,6 +14,7 @@ $pw = (isset($_GET['pw'])) ? $_GET['pw'] : '' ;
 $root = '/tweetsweep';
 $navigation[] = array('page' => 'home', 'href' => $root, 'caption' => 'Home');
 $navigation[] = array('page' => 'about', 'href' => $root.'?p=about', 'caption' => 'About');
+$navigation[] = array('page' => 'features', 'href' => $root.'?p=features', 'caption' => 'Features');
 $navigation[] = array('page' => 'contact', 'href' => $root.'?p=contact', 'caption' => 'Contact');
 $vars = array(
   'root' => $root,

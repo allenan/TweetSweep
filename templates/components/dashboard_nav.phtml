@@ -9,13 +9,17 @@
           <a class="brand" href="#"><img src="logos/tweetsweep5.png" height="100" width="150"/></a>
           <div class="nav-collapse">
             <ul class="nav">
-              <li class="active"><a href="{{root}}">Home</a></li>
-              <li><a href="{{root}}/?p=about">About</a></li>
-              <li><a href="#contact">Contact</a></li>
-              <li class="divider-vertical"></li>
+              {% for item in navigation %}
+                {% if item.page == page %}
+                  {% set active = 'active' %}
+                {% endif %}
+                <li class="{{active}}"><a href="{{ item.href }}">{{ item.caption }}</a></li>
+                {% set active = '' %}
+              {% endfor %}
+              <!-- <li class="divider-vertical"></li>
               <li><a href="#">Recon</a></li>
               <li><a href="#">Reach</a></li>
-              <li><a href="#">Reflection</a></li>
+              <li><a href="#">Reflection</a></li> -->
              
             </ul>
             
