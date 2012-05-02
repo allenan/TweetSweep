@@ -82,14 +82,14 @@ list-style: none;
 
 
 .btn-info:active, .btn-info.active {
-background-color: #24748C 9;
+background-color: #3270b3;
 }
 
 
 .btn.disabled, .btn[disabled] {
 cursor: default;
 background-image: none;
-background-color: #E6E6E6;
+background-color: #6A98C8;
 opacity: 0.65;
 filter: alpha(opacity=65);
 -webkit-box-shadow: none;
@@ -98,7 +98,41 @@ box-shadow: none;
 }
 
 .btn-info {
-background-color: #49AFCD;
+background-image: linear-gradient(bottom, rgb(50,112,179) 44%, rgb(43,96,153) 18%);
+background-image: -o-linear-gradient(bottom, rgb(50,112,179) 44%, rgb(43,96,153) 18%);
+background-image: -moz-linear-gradient(bottom, rgb(50,112,179) 44%, rgb(43,96,153) 18%);
+background-image: -webkit-linear-gradient(bottom, rgb(50,112,179) 44%, rgb(43,96,153) 18%);
+background-image: -ms-linear-gradient(bottom, rgb(50,112,179) 44%, rgb(43,96,153) 18%);
+
+background-image: -webkit-gradient(
+	linear,
+	left bottom,
+	left top,
+	color-stop(0.44, rgb(50,112,179)),
+	color-stop(0.18, rgb(43,96,153))
+);
+
+
+button.btn, input[type="submit"].btn {
+background-image: linear-gradient(bottom, rgb(50,112,179) 44%, rgb(43,96,153) 18%);
+background-image: -o-linear-gradient(bottom, rgb(50,112,179) 44%, rgb(43,96,153) 18%);
+background-image: -moz-linear-gradient(bottom, rgb(50,112,179) 44%, rgb(43,96,153) 18%);
+background-image: -webkit-linear-gradient(bottom, rgb(50,112,179) 44%, rgb(43,96,153) 18%);
+background-image: -ms-linear-gradient(bottom, rgb(50,112,179) 44%, rgb(43,96,153) 18%);
+
+background-image: -webkit-gradient(
+	linear,
+	left bottom,
+	left top,
+	color-stop(0.44, rgb(50,112,179)),
+	color-stop(0.18, rgb(43,96,153))
+);
+}
+
+}
+
+/* This code changes back to the twitter settings for the button*/
+/*background-color: #3270b3;
 background-image: -moz-linear-gradient(top, #5bc0de, #2f96b4);
 background-image: -ms-linear-gradient(top, #5bc0de, #2f96b4);
 background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#5bc0de), to(#2f96b4));
@@ -110,7 +144,17 @@ filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#5bc0de', endC
 border-color: #2F96B4 #2F96B4 #1F6377;
 border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
 filter: progid:dximagetransform.microsoft.gradient(enabled=false);
+}*/
+
+.contacts{
+width: 540px;
+margin-top: 30px;
+margin-left: 30px;
+
 }
 
+.span2.well{
+
+}
 
 
