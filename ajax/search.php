@@ -1,11 +1,11 @@
 <!-- <pre> -->
-<?php 
+<?php
   session_start();
   //$_SESSION['var_cache'] = serialize($tweetSweep->hashtagStruct);
   //print_r(unserialize($_SESSION['var_cache']));
   //echo $test[5] = 1;
 
-  ?>
+ ?> 
 <!-- </pre> -->
 
 
@@ -115,10 +115,10 @@ $tweetSweep->sortUserMentions();
   </thead>
   <tbody>
   <?php $i = 0; ?>
-<?php foreach ($tweetSweep->hashtagStruct as $h): ?>
+<?php foreach ($tweetSweep->hashtagStruct as $index => $h): ?>
   <tr>
     <td><a class="add-btn" data-content="<?php echo $h['text']; ?>" data-prefix="#" href="#"><img src="img/add.png"/></a></td>
-    <td><a class="hashtagInfo" data-toggle="modal" href="#myModal" target="_blank"><?php echo '#'.$h['text']?></a></td>
+    <td><a class="hashtagInfo" data-toggle="modal" href="#myModal" target="_blank" data-index="<?php echo $index ?>"><?php echo '#'.$h['text']?></a></td>
     <td><?php echo $h['count']?></td>
   </tr>
 <?php $i++;?>

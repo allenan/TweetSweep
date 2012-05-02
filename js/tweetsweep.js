@@ -45,7 +45,7 @@ $(document).ready(function() {
   });
 
   //check composition area for links and ajax them to nlp.php
-  $('.link-input').change(function() {
+  $('.link-input').keyup(function() {
     var ajax_load = '<img src="img/ajax-loader.gif"/>';
     var url = $(this).val();
     var loadUrl = 'ajax/nlp.php';
@@ -85,6 +85,7 @@ function search(q){
   var pages = $('#amount').val();
   $("#result").html(ajax_load).load(loadUrl, "q="+q+"&pages="+pages, function(){
     assignAdds();
+    assignHashtagModal();
     plotTime();
   });
 
@@ -157,6 +158,23 @@ function updateUserTimeline () {
     //assignAdds();
   });
 }
+
+/*
+ * Description: change the contents of the modal when hashtags are clicked on
+ * Inputs: none
+ * Outputs: none
+ */
+ function assignHashtagModal () {
+  $('.hashtagInfo').each(function(){
+    $(this).click(function(){
+      var index = $(this).data("index");
+      var hashtag = $(this).html();
+      $('#myModal h3').html(hashtag + " Details");
+      plotTime(index);
+      //console.log($(this));
+    });
+  });
+ }
 
 //Graveyard
 
