@@ -31,7 +31,7 @@ if ($code == 200) {
   ?>
 <table id="user-table" style="width:100%;">
           <tr>
-            <td><h4>Tweets</h4></td>
+            <td><h4>Feed</h4></td>
             
           </tr>
   <?php

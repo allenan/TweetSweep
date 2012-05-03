@@ -154,7 +154,7 @@ function checkboxTree(){
 function updateUserTimeline () {
   var ajax_load = "<img src='img/ajax-loader.gif' alt='loading...' style='margin-top:170px;margin-left:235px;' />";
   var loadUrl = "ajax/usertimeline.php";
-  $("#usertimeline").html(ajax_load).load(loadUrl, "q=", function(){
+  $("#usertimeline").load(loadUrl, "q=", function(){
     //assignAdds();
   });
 }
