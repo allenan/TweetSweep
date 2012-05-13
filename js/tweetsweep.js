@@ -107,6 +107,7 @@ function search(q){
  * Outputs: none
  */
 function assignAdds () {
+  $('.add-btn').unbind('click');
   $('.add-btn').click(function(e){
     e.preventDefault();
     var textarea = $('#composition-textarea');
@@ -114,13 +115,55 @@ function assignAdds () {
     var newText = $(this).data("content");
     var prefix = $(this).data("prefix");
 
-    if (text.search(newText) != -1) { //If the string is in the textarea...
-      text = text.replace(newText, prefix+newText);
+    if (text.search(new RegExp(prefix+newText,"i")) != -1) { //If the hashtag is already in the textarea...
+      text = text.replace(new RegExp(prefix+newText,"i"), prefix+newText);
       textarea.val(text);
-    }else{ //just append it
+      $(this).data("existed",true);
+    } else if(text.search(new RegExp(newText,"i")) != -1) {
+      text = text.replace(new RegExp(newText,"i"), prefix+newText);
+      textarea.val(text);
+      $(this).data("existed",true);
+    } else{ //just append it
       textarea.val(text+" "+prefix+newText);
+      $(this).data("existed",false);
     };
+    $(this).attr("class","rmv-btn");
+    $(this).children('img').attr("src","img/subtract.png");
+    assignRemoves();
+  });
+}
+
+/*
+ * Description: Makes the remove buttons remove the hashtag/@-mention text in the twitter composition area
+ * Inputs: none
+ * Outputs: none
+ */
+function assignRemoves(){
+  $('.rmv-btn').unbind('click');
+  $('.rmv-btn').click(function(e){
+    e.preventDefault();
+    var textarea = $('#composition-textarea');
+    var text = textarea.val();
+    var newText = $(this).data("content");
+    var prefix = $(this).data("prefix");
     
+    if ($(this).data("existed")) { //was the keyword already there?
+      if (text.search(new RegExp(prefix+newText,"i")) != -1) { //There might not be a space in front of it.
+        text = text.replace(new RegExp(prefix+newText,"i"), newText);
+        textarea.val(text);
+      }
+    } else {
+      if (text.search(new RegExp(" "+prefix+newText,"i")) != -1) { //Look for the tag in the text area and remove it. if there's a space in from remove that too, this gets rid of the extra spaces from clicking add and subtract repeatedly
+        text = text.replace(new RegExp(" "+prefix+newText,"i"), "");
+        textarea.val(text);
+      } else if (text.search(new RegExp(prefix+newText,"i")) != -1) { //There might not be a space in front of it.
+        text = text.replace(new RegExp(prefix+newText,"i"), "");
+        textarea.val(text);
+      }
+    };
+    $(this).attr("class","add-btn");
+    $(this).children('img').attr("src","img/add.png");
+    assignAdds();
   });
 }
 
