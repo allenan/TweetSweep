@@ -38,7 +38,10 @@ $(document).ready(function() {
         'ajax/tweet.php',
         { status: status },
         function() {
-          updateUserTimeline();
+          $('#composition-textarea').val('');
+          $.doTimeout(2000, function(){
+            updateUserTimeline();
+          });
         },
         "html"
       );
@@ -156,6 +159,10 @@ function updateUserTimeline () {
   var loadUrl = "ajax/usertimeline.php";
   $("#usertimeline").load(loadUrl, "q=", function(){
     //assignAdds();
+    $('#timeline-refresh').click(function(e){
+      e.preventDefault();
+      updateUserTimeline();
+    })
   });
 }
 
