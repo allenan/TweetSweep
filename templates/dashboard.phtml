@@ -27,6 +27,23 @@
         margin-top:10px;
         margin-left:0px;
       }
+      .ui-slider-handle {
+        background:none !important;
+        background-image: url('img/knob.png') !important;
+        background-position:center !important;
+        border:none !important;
+      }
+      #slider {
+        height:.6em;
+      }
+      .ui-slider-range {
+        background:#4099ff !important;
+      }
+      #linkInput i{
+        background-image:url('img/link.png');
+        background-position:center;
+        background-size:100%;
+      }
     </style>
     <link href="css/bootstrap-responsive.css" rel="stylesheet">
     <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/themes/base/jquery-ui.css" rel="stylesheet">
@@ -65,7 +82,7 @@
           <tr>
             <td colspan="3">
               <textarea class="" id="composition-textarea" rows="3" style="width:96%" placeholder="Compose new tweet..."></textarea>
-              <div class="input-prepend">
+              <div id="linkInput" class="input-prepend">
                 <span class="add-on"><i class="icon-file"></i></span>
                 <input class="span2 link-input" id="inputIcon" type="text" style="width:220px">
               </div>
@@ -83,7 +100,7 @@
         <div class="demo">
 
           <p>
-            <label for="amount"># Results to Query:</label>
+            <label for="amount">Sample Size:  <span id="sampleSizeHelp" class="badge badge-inverse">?</span></label>
             <input type="text" id="amount" style="border:0; color:#f6931f; font-weight:bold; width:50px; display:none" />
           </p>
 
@@ -138,8 +155,8 @@
     <script src="js/flot-tweetsweep.js"></script>
 
     <script type="text/javascript">
-      //$('#myModal').modal();
-      //$('#myModal').modal('hide');
+      var options = {'title': 'Sample Size Control', 'content': 'A higher sample size results in more accurate results, but takes longer to compute. A lower sample size computes results much faster but at the cost of accuracy.'};
+      $('#sampleSizeHelp').popover(options);
     </script>
    
 
