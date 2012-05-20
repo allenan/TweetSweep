@@ -116,9 +116,9 @@
           <div id="slider" style="margin-bottom:10px"></div>
           <!-- <hr/> -->
           <h5 style="float:left;margin-right:20px;padding:4px 0px 0px 4px;">Analyze:</h5>
-          <div class="btn-group" data-toggle="buttons-radio">
-            <button class="btn">All Content</button>
-            <button class="btn">Headline Only</button>
+          <div id="analyze-type" class="btn-group" name="analyze-type" data-toggle="buttons-radio">
+            <button class="btn active" value="0">All Content</button>
+            <button class="btn" value="1">Headline Only</button>
           </div>
 
           </div><!-- End demo -->
@@ -135,7 +135,7 @@
 
         <div id="query-box" class="span6" hidden="hidden">
           <form>
-          Tags to search:
+          Words to search:
           <input class="span4 search-query" id="query-input" type="text">
           <button id="query-btn" class="btn btn-info">Search</button>
           </form>

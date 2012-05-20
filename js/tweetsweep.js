@@ -12,8 +12,13 @@ $(document).ready(function() {
   //Attach search bar to search function
   $("#search-form").submit(function(e){
     var query = $('#search-form input').val();
+    query = query.replace('#','');
+    query = query.replace('@','');
+    query = $.trim(query);
     e.preventDefault();
     search(query);
+    $('#query-input').val(query);
+    $('#query-box').show("fast");
   });
 
   //responsive features of typing in the composition area
@@ -51,22 +56,52 @@ $(document).ready(function() {
   $('.link-input').keyup(function() {
     var ajax_load = '<img src="img/ajax-loader.gif"/>';
     var url = $(this).val();
-    var loadUrl = 'ajax/nlp.php';
+    if(url=="") return;
+    var loadUrl;
+    if($('#analyze-type .active').val()==1){
+      loadUrl = 'ajax/getTitleNLP.php';
+    } else {
+      loadUrl = 'ajax/nlp.php';
+    }
     $("#tags").html(ajax_load).load(loadUrl, "url="+url, function(){
         $('#query-input').val("");
         checkboxTree();
         $('#query-box').show("fast");
       });
   });
-
+  //re analyze if toggled
+  $('#analyze-type .btn').click(function(e){
+    var ajax_load = '<img src="img/ajax-loader.gif"/>';
+    var url = $('.link-input').val();
+    if(url=="") return;
+    var loadUrl;
+    if($(this).val()=="1"){
+      loadUrl = 'ajax/getTitleNLP.php';
+    } else {
+      loadUrl = 'ajax/nlp.php';
+    }
+    $("#tags").html(ajax_load).load(loadUrl, "url="+url, function(){
+        $('#query-input').val("");
+        checkboxTree();
+        $('#query-box').show("fast");
+      });
+  });
+  
+  //check if we hit enter in the search string area
   $('#query-input').submit(function(e){
     var query = $('#query-input').val();
+    query = query.replace('#','');
+    query = query.replace('@','');
+    query = $.trim(query);
     e.preventDefault();
     search(query);
   });
-
+  //check if we clicked search in the search string area
   $('#query-btn').click(function(e){
     var query = $('#query-input').val();
+    query = query.replace('#','');
+    query = query.replace('@','');
+    query = $.trim(query);
     e.preventDefault();
     search(query);
   });
