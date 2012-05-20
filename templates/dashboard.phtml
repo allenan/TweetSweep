@@ -44,6 +44,13 @@
         background-position:center;
         background-size:100%;
       }
+      .module{
+        /*padding:5px;*/
+        background-color:#efefef;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+      }
     </style>
     <link href="css/bootstrap-responsive.css" rel="stylesheet">
     <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/themes/base/jquery-ui.css" rel="stylesheet">
@@ -67,7 +74,7 @@
       <div class="row-fluid">
 
         <div class="span3">
-      <div class="span3" style="padding:5px;background-color:#efefef">
+      <div class="span3 module">
         <table id="user-table" style="width:100%;">
           <tr>
             <td><img src="{{profile_image_url}}"</td>
@@ -96,19 +103,27 @@
 
       </div> <!-- span3 -->
       <!-- id="usertimeline" -->
-      <div class="span3">
+      <div class="span3 module" style="margin-top:20px;">
         <div class="demo">
-
+          <h3>Search Settings</h3>
+          <!-- <hr/> -->
           <p>
-            <label for="amount">Sample Size:  <span id="sampleSizeHelp" class="badge badge-inverse">?</span></label>
-            <input type="text" id="amount" style="border:0; color:#f6931f; font-weight:bold; width:50px; display:none" />
+            <label for="amount" style="padding-top:4px;float:left;font-weight:bold">Sample Size:</label>
+            <input type="text" id="amount" style="border:0; width:50px;" />
+            <img id="sampleSizeHelp" src="img/help.png" style="margin-left:100px;padding-bottom:10px" width="24"/>
           </p>
 
-          <div id="slider"></div>
+          <div id="slider" style="margin-bottom:10px"></div>
+          <!-- <hr/> -->
+          <h5 style="float:left;margin-right:20px;padding:4px 0px 0px 4px;">Analyze:</h5>
+          <div class="btn-group" data-toggle="buttons-radio">
+            <button class="btn">All Content</button>
+            <button class="btn">Headline Only</button>
+          </div>
 
           </div><!-- End demo -->
       </div>
-      <div id="" class="span3" style="padding:0;height:350px;overflow:auto;">
+      <div id="" class="span3 module" style="height:350px;overflow:auto;margin-top:20px">
       
        <h4>Tags:</h4>
         <div id="tags"></div>
@@ -117,6 +132,7 @@
     </div>
     
       <div class="span6">
+
         <div id="query-box" class="span6" hidden="hidden">
           <form>
           Tags to search:
@@ -124,10 +140,11 @@
           <button id="query-btn" class="btn btn-info">Search</button>
           </form>
         </div>
-        <div id="result" class="span6" style="height:552px"> </div>
+        <div id="result" class="span6 module" style="height:552px"> </div>
+
       </div>
 
-      <div class="span3">
+      <div class="span3 module">
         <div id="usertimeline"></div>
       </div>
       <!-- <a id="testButton" class="btn" data-toggle="modal" data-contents="#masters" href="#myModal" >Launch Modal</a> -->
