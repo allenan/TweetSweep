@@ -24,7 +24,7 @@ $tweetSweep = new TweetSweep();
 $pages = (isset($_GET['pages'])) ? ((int)$_GET['pages'])/100 : 5 ;
 //$pages = 12;
 //$pages = ((int)$_GET['pages'])/100;
-$q = (isset($_GET['q'])) ? $_GET['q'] : "bieber" ;
+$q = (isset($_GET['q'])) ? $_GET['q'] : "cubs" ;
 $args = array(
   'q'        => $q,
   'since_id' => '0',
@@ -64,12 +64,14 @@ for ($i=$pages; $i > 0; $i--) {
 foreach ($results as $result) {
   $date = strtotime($result['created_at']);
   $from_user = $result['from_user_id'];
+
+  $tweet = array('text' => $result['text'], 'from_user_id' => $from_user, 'from_user_name' => $result['from_user_name'], 'from_user' => $result['from_user'], 'created_at' => $result['created_at'], 'profile_image_url' => $result['profile_image_url']);
   //$result['text'] = str_replace(PHP_EOL, '', $result['text']);
   //print_r($result);
   //echo "{$result['id_str']}\t{$date}\t{$result['from_user']}\t\t{$result['text']}" . PHP_EOL;
   foreach ($result['entities']['hashtags'] as $hashtag ) {
     if ($hashtag['text'] != '') {
-      $tweetSweep->addHashtag($hashtag['text'], $date, $from_user);
+      $tweetSweep->addHashtag($hashtag['text'], $date, $from_user, $tweet);
       //echo $hashtag['text'];
       //echo '<br/>';
     } 
@@ -116,9 +118,10 @@ $tweetSweep->sortUserMentions();
   <tbody>
   <?php $i = 0; ?>
 <?php foreach ($tweetSweep->hashtagStruct as $index => $h): ?>
+  
   <tr>
     <td><a class="add-btn" data-content="<?php echo $h['text']; ?>" data-prefix="#" href="#"><img src="img/add.png"/></a></td>
-    <td><a class="hashtagInfo" data-toggle="modal" href="#myModal" target="_blank" data-index="<?php echo $index ?>"><?php echo '#'.$h['text']?></a></td>
+    <td><a class="hashtagInfo" data-toggle="modal" href="#myModal" target="_blank" data-index="<?php echo $index ?>" ><?php echo '#'.$h['text']?></a></td>
     <td><?php echo $h['count']?></td>
   </tr>
 <?php $i++;?>

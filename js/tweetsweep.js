@@ -1,3 +1,29 @@
+function linkify(inputText) {
+    var replaceText, replacePattern1, replacePattern2, replacePattern3;
+
+    //URLs starting with http://, https://, or ftp://
+    replacePattern1 = /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim;
+    replacedText = inputText.replace(replacePattern1, '<a href="$1" target="_blank">$1</a>');
+
+    //URLs starting with "www." (without // before it, or it'd re-link the ones done above).
+    replacePattern2 = /(^|[^\/])(www\.[\S]+(\b|$))/gim;
+    replacedText = replacedText.replace(replacePattern2, '$1<a href="http://$2" target="_blank">$2</a>');
+
+    //Change email addresses to mailto:: links.
+    replacePattern3 = /(\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,6})/gim;
+    replacedText = replacedText.replace(replacePattern3, '<a href="mailto:$1">$1</a>');
+
+    //Change hashtags to links to twitter search
+    replacePattern4 = /#([a-zA-Z0-9]*)/gim;
+    replacedText = replacedText.replace(replacePattern4, '<a href="http://twitter.com/#!/search/%23$1" target="_blank">#$1</a>');
+
+    //match @ mentions
+    replacePattern5 = /@([a-zA-Z0-9]*)/gim;
+    replacedText = replacedText.replace(replacePattern5, '<a href="http://twitter.com/#!/$1" target="_blank">@$1</a>');
+
+    return replacedText
+}
+
 //Setup
 $.ajaxSetup ({
   cache: false
@@ -102,6 +128,11 @@ function search(q){
     assignAdds();
     assignHashtagModal();
     plotTime();
+    $.ajax({
+        url: 'js/session.php',
+        dataType: "script",
+        success: function() {setHashtagStruct();}
+      });
   });
 
   // var scriptUrl = "js/flot-tweetsweep.php";  
@@ -258,9 +289,29 @@ function updateUserTimeline () {
     $(this).click(function(){
       var index = $(this).data("index");
       var hashtag = $(this).html();
+      
       $('#myModal h3').html(hashtag + " Details");
       plotTime(index);
-      //console.log($(this));
+      console.log($(this).data('index'));
+
+      $('#context-tweets').find('tbody').empty();
+
+      $.each(hashtagStruct[index].tweets, function(i, t){
+        $('#context-tweets').find('tbody')
+          .append($('<tr>')
+            .append($('<img>').attr('src', t.profile_image_url))
+            .append($('<td>').html(
+              '<div><strong>'+t.from_user_name+' '+'</strong>'+'@'+t.from_user+'</div>'+
+              '<p>'+linkify(t.text)+'</p>'+
+              '<small>'+t.created_at+'</small>'
+            ))
+          );
+      });
+
+      // $('#context-tweets').find('tbody')
+      //   .append($('<tr>')
+      //     .append($('<td>').append($('<img>').attr('src', 'http://placehold.it/20x20')))
+      //   );
     });
   });
  }

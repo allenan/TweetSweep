@@ -12,7 +12,7 @@ class TweetSweep
 		$this->userMentionStruct = array();
 	}
 
-	function addHashtag($hashtag, $date, $from_user)
+	function addHashtag($hashtag, $date, $from_user, $tweet)
 	{
 		$date = $this->roundDate($date);
 		//see if hashtag exists in the struct
@@ -25,11 +25,13 @@ class TweetSweep
 				//If the time is already a key, then increment it
 				$this->hashtagStruct[$hashtag]['times'][strval($date)] = array('time' => $date, 'realtime' => date("h:i:s A T, M jS, Y", $date), 'count' => $this->hashtagStruct[$hashtag]['times'][strval($date)]['count'] + 1);
 				$this->hashtagStruct[$hashtag]['users'][] = $from_user;
+				$this->hashtagStruct[$hashtag]['tweets'][] = $tweet;
 			} else {
 				//echo 'not found<br/>';
 				//It the key is not defined, make a new time
 				$this->hashtagStruct[$hashtag]['times'][strval($date)] = array('time' => $date, 'realtime' => date("h:i:s A T, M jS, Y", $date), 'count' => 1);
 				$this->hashtagStruct[$hashtag]['users'][] = $from_user;
+				$this->hashtagStruct[$hashtag]['tweets'][] = $tweet;
 			}
 			
 			
@@ -43,6 +45,7 @@ class TweetSweep
 			//make a new time key/value
 			$this->hashtagStruct[$hashtag]['times'][strval($date)] = array('time' => $date, 'realtime' => date("h:i:s A T, M jS, Y", $date), 'count' => 1);
 			$this->hashtagStruct[$hashtag]['users'][] = $from_user;
+			$this->hashtagStruct[$hashtag]['tweets'][] = $tweet;
 		}
 	}
 
