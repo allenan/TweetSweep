@@ -3,7 +3,7 @@ require('../lib/opencalais.php');
 require('../lib/content-extract.php');
 $oc = new OpenCalais('t7vydt6bxg5m6v2vtc7bk929');
 $content = $_GET['content'];
-$threshold = 0.4;
+//$threshold = 0.4;
 
 $entities = $oc->getEntities($content);
 
