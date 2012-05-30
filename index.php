@@ -7,6 +7,8 @@ $twig = new Twig_Environment($loader, array());
 
 include_once 'lib/auth.php';
 
+ini_set('allow_url_fopen', 1);
+
 $alphaKey = "a8e2eaebf76d2ecd4dabef2ff136fc87";
 $page = (isset($_GET['p'])) ? $_GET['p'] : 'home';
 $pw = (isset($_GET['pw'])) ? $_GET['pw'] : '' ;
