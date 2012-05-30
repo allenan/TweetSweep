@@ -59,7 +59,19 @@ $(document).ready(function() {
       $('#tweet-btn').addClass('disabled');
     };
   });
-
+  
+  $('#composition-textarea').blur(function(){
+    if($('#analyze-type .active').val()!=2) return;
+    var ajax_load = '<img src="img/ajax-loader.gif"/>';
+    var content = $(this).val();
+    var loadUrl = 'ajax/nlptext.php';
+      var content = $('#composition-textarea').val();
+      $("#tags").html(ajax_load).load(loadUrl, "content="+content, function(){
+        $('#query-input').val("");
+        checkboxTree();
+        $('#query-box').show("fast");
+      });
+  });
 
   //execute tweet on click of tweet button
   $('#tweet-btn').click(function() {
@@ -86,7 +98,11 @@ $(document).ready(function() {
     var loadUrl;
     if($('#analyze-type .active').val()==1){
       loadUrl = 'ajax/getTitleNLP.php';
-    } else {
+    } else if($('#analyze-type .active').val()==2)
+    {
+      return;
+    }
+    else {
       loadUrl = 'ajax/nlp.php';
     }
     $("#tags").html(ajax_load).load(loadUrl, "url="+url, function(){
@@ -103,7 +119,18 @@ $(document).ready(function() {
     var loadUrl;
     if($(this).val()=="1"){
       loadUrl = 'ajax/getTitleNLP.php';
-    } else {
+    } else if($(this).val()=="2")
+    {
+      loadUrl = 'ajax/nlptext.php';
+      var content = $('#composition-textarea').val();
+      $("#tags").html(ajax_load).load(loadUrl, "content="+content, function(){
+        $('#query-input').val("");
+        checkboxTree();
+        $('#query-box').show("fast");
+      });
+      return;
+    }
+    else {
       loadUrl = 'ajax/nlp.php';
     }
     $("#tags").html(ajax_load).load(loadUrl, "url="+url, function(){
