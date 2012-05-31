@@ -76,12 +76,16 @@ $(document).ready(function() {
   //execute tweet on click of tweet button
   $('#tweet-btn').click(function() {
     var status = $('#composition-textarea').val();
+    var link = $('.link-input').val();
+
+    var statusToPost = status + ' ' + link;
 
     $.post(
         'ajax/tweet.php',
-        { status: status },
+        { status: statusToPost },
         function() {
           $('#composition-textarea').val('');
+          $('.link-input').val('');
           $.doTimeout(2000, function(){
             updateUserTimeline();
           });
