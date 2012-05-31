@@ -171,7 +171,7 @@ $( "#slider" ).slider({
   range:"min",
   value:500,
   min: 100,
-  max: 2000,
+  max: 1500,
   step: 100,
   slide: function( event, ui ) {
     $( "#amount" ).val( ui.value );
@@ -321,7 +321,8 @@ function checkboxTree(){
         string = string.replace(new RegExp($(this).data("content"),"i"),$(this).data("content"));
         $('#query-input').val(string);
       } else{
-        string += " "+$(this).data("content");
+        if ($('#query-input').val() != ""){ string += ' OR'};
+        string += ' "'+$(this).data("content")+'"';
         $('#query-input').val(string);
       }
     }

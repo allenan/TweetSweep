@@ -4,7 +4,7 @@ require('../lib/content-extract.php');
 require('../lib/simple_html_dom.php');
 $oc = new OpenCalais('t7vydt6bxg5m6v2vtc7bk929');
 $html = file_get_html($_GET['url']);
-//$threshold = 0.4;
+$threshold = 0.5;
 //$html = file_get_contents('http://www.forbes.com/sites/petercohan/2012/04/12/9-99-e-book-price-to-cost-apple-252-million/');
  
 //$extractor = new ContentExtractor();

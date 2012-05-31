@@ -3,7 +3,7 @@ require('../lib/opencalais.php');
 require('../lib/content-extract.php');
 $oc = new OpenCalais('t7vydt6bxg5m6v2vtc7bk929');
 $html = file_get_contents($_GET['url']);
-//$threshold = ;
+$threshold = 0.4;
 //$html = file_get_contents('http://www.forbes.com/sites/petercohan/2012/04/12/9-99-e-book-price-to-cost-apple-252-million/');
  
 $extractor = new ContentExtractor();
@@ -25,6 +25,7 @@ $entities = $oc->getEntities($content);
 							data-count="<?php echo $i['count'];?>"
 						/>
 						<?php echo $i['name']; ?>
+						<?php echo ' ('.$i['relevancy'].')';?>
 					</li>
 				<?php endforeach; ?>
 			</ul>
