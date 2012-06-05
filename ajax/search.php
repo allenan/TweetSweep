@@ -101,7 +101,6 @@ $tweetSweep->sortUserMentions();
   ?>
 <!-- </pre>  -->
 
-<h1>Results for <?php echo $args['q'];?></h1>
 <p>Based on <?php echo $args['rpp']*$pages; ?> recent tweets</p>
 <div class="row">
   <div class="span3">

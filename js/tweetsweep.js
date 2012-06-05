@@ -59,17 +59,33 @@ $(document).ready(function() {
       $('#tweet-btn').addClass('disabled');
     };
   });
-
+  
+  $('#composition-textarea').blur(function(){
+    if($('#analyze-type .active').val()!=2) return;
+    var ajax_load = '<img src="img/ajax-loader.gif"/>';
+    var content = $(this).val();
+    var loadUrl = 'ajax/nlptext.php';
+      var content = $('#composition-textarea').val();
+      $("#tags").html(ajax_load).load(loadUrl, "content="+content, function(){
+        $('#query-input').val("");
+        checkboxTree();
+        $('#query-box').show("fast");
+      });
+  });
 
   //execute tweet on click of tweet button
   $('#tweet-btn').click(function() {
     var status = $('#composition-textarea').val();
+    var link = $('.link-input').val();
+
+    var statusToPost = status + ' ' + link;
 
     $.post(
         'ajax/tweet.php',
-        { status: status },
+        { status: statusToPost },
         function() {
           $('#composition-textarea').val('');
+          $('.link-input').val('');
           $.doTimeout(2000, function(){
             updateUserTimeline();
           });
@@ -86,7 +102,11 @@ $(document).ready(function() {
     var loadUrl;
     if($('#analyze-type .active').val()==1){
       loadUrl = 'ajax/getTitleNLP.php';
-    } else {
+    } else if($('#analyze-type .active').val()==2)
+    {
+      return;
+    }
+    else {
       loadUrl = 'ajax/nlp.php';
     }
     $("#tags").html(ajax_load).load(loadUrl, "url="+url, function(){
@@ -103,7 +123,18 @@ $(document).ready(function() {
     var loadUrl;
     if($(this).val()=="1"){
       loadUrl = 'ajax/getTitleNLP.php';
-    } else {
+    } else if($(this).val()=="2")
+    {
+      loadUrl = 'ajax/nlptext.php';
+      var content = $('#composition-textarea').val();
+      $("#tags").html(ajax_load).load(loadUrl, "content="+content, function(){
+        $('#query-input').val("");
+        checkboxTree();
+        $('#query-box').show("fast");
+      });
+      return;
+    }
+    else {
       loadUrl = 'ajax/nlp.php';
     }
     $("#tags").html(ajax_load).load(loadUrl, "url="+url, function(){
@@ -140,7 +171,7 @@ $( "#slider" ).slider({
   range:"min",
   value:500,
   min: 100,
-  max: 2000,
+  max: 1500,
   step: 100,
   slide: function( event, ui ) {
     $( "#amount" ).val( ui.value );
@@ -290,7 +321,8 @@ function checkboxTree(){
         string = string.replace(new RegExp($(this).data("content"),"i"),$(this).data("content"));
         $('#query-input').val(string);
       } else{
-        string += " "+$(this).data("content");
+        if ($('#query-input').val() != ""){ string += ' OR'};
+        string += ' "'+$(this).data("content")+'"';
         $('#query-input').val(string);
       }
     }

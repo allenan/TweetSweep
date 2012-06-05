@@ -7,11 +7,15 @@ $twig = new Twig_Environment($loader, array());
 
 include_once 'lib/auth.php';
 
+
+
 $alphaKey = "a8e2eaebf76d2ecd4dabef2ff136fc87";
+$threshold = 0.5;
+
 $page = (isset($_GET['p'])) ? $_GET['p'] : 'home';
 $pw = (isset($_GET['pw'])) ? $_GET['pw'] : '' ;
 
-$root = '/tweetsweep';
+$root = '/';
 $navigation[] = array('page' => 'home', 'href' => $root, 'caption' => 'Home');
 $navigation[] = array('page' => 'about', 'href' => $root.'?p=about', 'caption' => 'About');
 $navigation[] = array('page' => 'features', 'href' => $root.'?p=features', 'caption' => 'Features');

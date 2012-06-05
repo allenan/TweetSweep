@@ -25,6 +25,7 @@ $entities = $oc->getEntities($content);
 							data-count="<?php echo $i['count'];?>"
 						/>
 						<?php echo $i['name']; ?>
+						<?php echo ' ('.$i['relevancy'].')';?>
 					</li>
 				<?php endforeach; ?>
 			</ul>

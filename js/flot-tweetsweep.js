@@ -14,7 +14,7 @@ $().ready(function(){
 
 function plotTime(i){
 	d = [];
-    var dataurl = '/tweetsweep/ajax/times.php';
+    var dataurl = '/ajax/times.php';
 
     $.getJSON(  
         dataurl,  
