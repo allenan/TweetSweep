@@ -60,7 +60,7 @@ $(document).ready(function() {
     };
   });
   
-  $('#composition-textarea').blur(function(){
+  /*$('#composition-textarea').blur(function(){
     if($('#analyze-type .active').val()!=2) return;
     var ajax_load = '<img src="img/ajax-loader.gif"/>';
     var content = $(this).val();
@@ -71,8 +71,44 @@ $(document).ready(function() {
         checkboxTree();
         $('#query-box').show("fast");
       });
+  });*/
+  //execute analyze on click of analyze button
+  $('#analyze-btn').click(function() {
+    var ajax_load = '<img src="img/ajax-loader.gif"/>';
+    var content = '';
+    var loadUrl = '';
+    switch(parseInt($('#analyze-type .active').val()))
+    {
+      case 0:
+        content = $('.link-input').val();
+        loadUrl = 'ajax/nlp.php';
+        $("#tags").html(ajax_load).load(loadUrl, "url="+content, function(){
+          $('#query-input').val("");
+          checkboxTree();
+          $('#query-box').show("fast");
+        });
+        break;
+      case 1:
+        content = $('.link-input').val();
+        loadUrl = 'ajax/getTitleNLP.php'
+        $("#tags").html(ajax_load).load(loadUrl, "url="+content, function(){
+          $('#query-input').val("");
+          checkboxTree();
+          $('#query-box').show("fast");
+        });
+        break;
+      case 2:
+        content = $('#composition-textarea').val();
+        loadUrl = 'ajax/nlptext.php';
+        $("#tags").html(ajax_load).load(loadUrl, "content="+content, function(){
+          $('#query-input').val("");
+          checkboxTree();
+          $('#query-box').show("fast");
+        });
+        break;
+    }
   });
-
+  
   //execute tweet on click of tweet button
   $('#tweet-btn').click(function() {
     var status = $('#composition-textarea').val();
@@ -95,7 +131,7 @@ $(document).ready(function() {
   });
 
   //check composition area for links and ajax them to nlp.php
-  $('.link-input').keyup(function() {
+  /*$('.link-input').keyup(function() {
     var ajax_load = '<img src="img/ajax-loader.gif"/>';
     var url = $(this).val();
     if(url=="") return;
@@ -114,9 +150,9 @@ $(document).ready(function() {
         checkboxTree();
         $('#query-box').show("fast");
       });
-  });
+  });*/
   //re analyze if toggled
-  $('#analyze-type .btn').click(function(e){
+  /*$('#analyze-type .btn').click(function(e){
     var ajax_load = '<img src="img/ajax-loader.gif"/>';
     var url = $('.link-input').val();
     if(url=="") return;
@@ -142,7 +178,7 @@ $(document).ready(function() {
         checkboxTree();
         $('#query-box').show("fast");
       });
-  });
+  });*/
   
   //check if we hit enter in the search string area
   $('#query-input').submit(function(e){
@@ -191,6 +227,7 @@ function search(q){
   var loadUrl = "ajax/search.php";
   var pages = $('#amount').val();
   $("#result").html(ajax_load).load(loadUrl, "q="+q+"&pages="+pages, function(){
+    $('#tweet-btn-container').show("fast");
     assignAdds();
     assignHashtagModal();
     plotTime();
@@ -239,6 +276,7 @@ function assignAdds () {
     $(this).attr("class","rmv-btn");
     $(this).children('img').attr("src","img/subtract.png");
     assignRemoves();
+    textarea.trigger('keyup');
   });
 }
 
@@ -273,6 +311,7 @@ function assignRemoves(){
     $(this).attr("class","add-btn");
     $(this).children('img').attr("src","img/add.png");
     assignAdds();
+    textarea.trigger('keyup');
   });
 }
 
@@ -282,7 +321,24 @@ function assignRemoves(){
  * Outputs: none
  */
 function checkboxTree(){
-  $('#tags > ul  ul').hide();
+  var tags = [];
+  $('#tags ul input').each(function(){
+    tags.push([$(this).data("content"),$(this).data("relevancy")]);
+  });
+  tags.sort(function(a,b){return b[1]-a[1]});
+  for(var i=0;i<3;i++)
+  {
+    var string = $('#query-input').val();
+    if(string.search(new RegExp(tags[i][0],"i"))!=-1){
+      string = string.replace(new RegExp(tags[i][0],"i"),tags[i][0]);
+      $('#query-input').val(string);
+    } else{
+      if ($('#query-input').val() != ""){ string += ' OR'};
+      string += ' "'+tags[i][0]+'"';
+      $('#query-input').val(string);
+    }
+  }
+  /*$('#tags > ul  ul').hide();
   $('#tags > ul > li').prepend('<a href="#"><img src="img/expand.png"/></a>');
   $('#tags > ul a').click(function(e){
     e.preventDefault();
@@ -326,7 +382,7 @@ function checkboxTree(){
         $('#query-input').val(string);
       }
     }
-  );
+  );*/
 }
 
 /*

@@ -92,14 +92,15 @@
           </tr>
           <tr>
             <td colspan="3">
-              <textarea class="" id="composition-textarea" rows="3" style="width:96%" placeholder="Compose new tweet..."></textarea>
               <div id="linkInput" class="input-prepend">
                 <span class="add-on"><i class="icon-file"></i></span>
                 <input class="span2 link-input" id="inputIcon" type="text" style="width:220px">
               </div>
+              <textarea class="" id="composition-textarea" rows="3" style="width:96%" placeholder="Compose new tweet..."></textarea>
               <div style="text-align:right;">
                 <span id="chars-remaining">140</span>
-                <button id="tweet-btn" class="btn btn-info disabled">Tweet</button>
+                <button id="analyze-btn" class="btn btn-info">Analyze</button>
+                <!--<button id="tweet-btn" class="btn btn-info disabled">Tweet</button>-->
               </div>
             </td>
           </tr>
@@ -128,7 +129,7 @@
 
           </div><!-- End demo -->
       </div>
-      <div id="" class="span3 module" style="height:350px;overflow:auto;margin-top:20px">
+      <div id="" class="span3 module" hidden="hidden" style="height:350px;overflow:auto;margin-top:20px">
       
        <h4>Tags:</h4>
         <div id="tags"></div>
@@ -145,7 +146,10 @@
           <button id="query-btn" class="btn btn-info">Search</button>
           </form>
         </div>
-        <div id="result" class="span6 module" style="height:552px"> </div>
+        <div id="result" class="span6 module" style="height:470px"> </div>
+        <div id="tweet-btn-container" class="span6" hidden="hidden" style="text-align: center;padding: 10px;">
+          <button id="tweet-btn" class="btn btn-large btn-info disabled">Tweet</button>
+        </div>
 
       </div>
 
