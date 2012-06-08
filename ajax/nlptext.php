@@ -1,4 +1,5 @@
 <?php
+//this extracts tags from the tweet that the user composed
 require('../lib/opencalais.php');
 require('../lib/content-extract.php');
 $oc = new OpenCalais('t7vydt6bxg5m6v2vtc7bk929');
