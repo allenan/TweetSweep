@@ -1,0 +1,9 @@
+To set up the website:
+1. Install XAMPP
+2. Drag the folder into /htdocs
+
+All you really need is to have a php server to host this site so any equivalent of XAMPP should be fine.
+
+We have a live version up and running at tweetsweep.net
+you will need to have the alpha key to gain access to the service, so you actually use this link:
+tweetsweep.net/?pw=a8e2eaebf76d2ecd4dabef2ff136fc87
