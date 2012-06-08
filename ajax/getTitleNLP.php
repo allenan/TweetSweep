@@ -1,4 +1,5 @@
 <?php
+//this extracts tags only from the title of a web page
 require('../lib/opencalais.php');
 require('../lib/content-extract.php');
 require('../lib/simple_html_dom.php');
